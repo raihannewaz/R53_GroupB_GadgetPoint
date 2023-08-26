@@ -32,7 +32,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return entity;
         }
 
-        public async Task<Brand> GetByIdAsync(int id)
+        public async Task<Brand?> GetByIdAsync(int id)
         {
             return  await _context.Brands.FindAsync(id);
  
@@ -43,7 +43,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return await _context.Brands.ToListAsync();
         }
 
-        public async Task<Brand> UpdateAsync(int id, Brand entity)
+        public async Task<Brand?> UpdateAsync(int id, Brand entity)
         {
              var exentity = await _context.Brands.FindAsync(id);
             if (exentity != null)
