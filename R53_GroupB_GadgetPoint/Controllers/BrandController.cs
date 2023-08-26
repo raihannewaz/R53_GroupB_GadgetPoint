@@ -9,12 +9,11 @@ namespace R53_GroubB_GadgetPoint.Controllers
     [ApiController]
     public class BrandController : ControllerBase
     {
-        private IGenericRepository<Brand> rpBrand;
+        private IBrandRepository rpBrand;
 
-        public BrandController(IGenericRepository<Brand> ripository)
+        public BrandController(IBrandRepository ripository)
         {
             rpBrand = ripository;
-
         }
 
 
@@ -37,18 +36,18 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Brand>> Create(Brand entity)
+        public async Task<ActionResult> Create(Brand entity)
         {
             if (ModelState.IsValid)
             {
-                var createdEntity = await rpBrand.AddAsync(entity);
+                var createdEntity = await rpBrand.CreateAsync(entity);
                 return Ok(createdEntity);
             }
             return BadRequest();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Brand>> Update(int id, Brand entity)
+        public async Task<ActionResult> Update(int id, Brand entity)
         {
 
             var updatedEntity = await rpBrand.UpdateAsync(id, entity);
@@ -57,7 +56,7 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Brand>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var entity = await rpBrand.GetByIdAsync(id);
             if (entity != null)

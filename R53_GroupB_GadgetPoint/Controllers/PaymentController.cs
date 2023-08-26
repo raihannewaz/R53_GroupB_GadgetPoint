@@ -9,9 +9,9 @@ namespace R53_GroubB_GadgetPoint.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private IGenericRepository<Payment> rpPayment;
+        private IPaymentRepository rpPayment;
 
-        public PaymentController(IGenericRepository<Payment> ripository)
+        public PaymentController(IPaymentRepository ripository)
         {
             rpPayment = ripository;
 
@@ -37,18 +37,18 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Payment>> Create(Payment entity)
+        public async Task<ActionResult> Create(Payment entity)
         {
             if (ModelState.IsValid)
             {
-                var createdEntity = await rpPayment.AddAsync(entity);
+                var createdEntity = await rpPayment.CreateAsync(entity);
                 return Ok(createdEntity);
             }
             return BadRequest();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Payment>> Update(int id, Payment entity)
+        public async Task<ActionResult> Update(int id, Payment entity)
         {
 
             var updatedEntity = await rpPayment.UpdateAsync(id, entity);
@@ -57,7 +57,7 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Brand>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var entity = await rpPayment.GetByIdAsync(id);
             if (entity != null)

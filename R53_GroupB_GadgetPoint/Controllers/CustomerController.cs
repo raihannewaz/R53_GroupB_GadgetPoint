@@ -10,9 +10,9 @@ namespace R53_GroubB_GadgetPoint.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private IGenericRepository<Customer> rpCustomer;
+        private ICustomerRepository rpCustomer;
 
-        public CustomerController(IGenericRepository<Customer> ripository)
+        public CustomerController(ICustomerRepository ripository)
         {
             rpCustomer = ripository;
 
@@ -38,18 +38,18 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Customer>> Create(Customer entity)
+        public async Task<ActionResult> Create(Customer entity)
         {
             if (ModelState.IsValid)
             {
-                var createdEntity = await rpCustomer.AddAsync(entity);
+                var createdEntity = await rpCustomer.CreateAsync(entity);
                 return Ok(createdEntity);
             }
             return BadRequest();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Customer>> Update(int id, Customer entity)
+        public async Task<ActionResult> Update(int id, Customer entity)
         {
 
             var updatedEntity = await rpCustomer.UpdateAsync(id, entity);
@@ -58,7 +58,7 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Customer>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var entity = await rpCustomer.GetByIdAsync(id);
             if (entity != null)

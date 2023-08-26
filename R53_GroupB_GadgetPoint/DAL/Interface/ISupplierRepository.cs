@@ -2,8 +2,7 @@
 
 namespace R53_GroupB_GadgetPoint.DAL.Interface
 {
-    public interface IBrandRepository :IGenericRepository<Brand>
+    public interface ISupplierRepository:IGenericRepository<Supplier>
     {
-
     }
 }

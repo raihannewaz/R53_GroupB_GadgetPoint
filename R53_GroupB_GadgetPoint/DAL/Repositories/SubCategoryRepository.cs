@@ -1,58 +1,57 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_Entity.Context;
 using Project_Entity.Models;
-using R53_GroupB_GadgetPoint.DAL.Interface;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
-    public class BrandRepository : IBrandRepository
+    public class SubCategoryRepository
     {
         private readonly StoreContext _context;
 
-        public BrandRepository(StoreContext store)
+        public SubCategoryRepository(StoreContext store)
         {
             _context = store;
         }
 
-        public async Task<Brand> CreateAsync(Brand entity)
+        public async Task<SubCategory> CreateAsync(SubCategory entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            await _context.Brands.AddAsync(entity);
+            await _context.SubCategories.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<Brand> DeleteAsync(Brand entity)
+        public async Task<SubCategory> DeleteAsync(SubCategory entity)
         {
-             _context.Brands.Remove(entity);
+            _context.SubCategories.Remove(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<Brand> GetByIdAsync(int id)
+        public async Task<SubCategory> GetByIdAsync(int id)
         {
-            return  await _context.Brands.FindAsync(id);
- 
+            return await _context.SubCategories.FindAsync(id);
+
         }
 
-        public async Task<IReadOnlyList<Brand>> ListAllAsync()
+        public async Task<IReadOnlyList<SubCategory>> ListAllAsync()
         {
-            return await _context.Brands.ToListAsync();
+            return await _context.SubCategories.ToListAsync();
         }
 
-        public async Task<Brand> UpdateAsync(int id, Brand entity)
+        public async Task<SubCategory> UpdateAsync(int id, SubCategory entity)
         {
-             var exentity = await _context.Brands.FindAsync(id);
+            var exentity = await _context.SubCategories.FindAsync(id);
             if (exentity != null)
             {
                 _context.Entry(exentity).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
             }
             return exentity;
-           
+
         }
     }
 }

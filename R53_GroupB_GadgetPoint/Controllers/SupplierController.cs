@@ -12,9 +12,9 @@ namespace R53_GroubB_GadgetPoint.Controllers
     [ApiController]
     public class SupplierController : ControllerBase
     {
-        private IGenericRepository<Supplier> rpSupplier;
+        private ISupplierRepository rpSupplier;
 
-        public SupplierController(IGenericRepository<Supplier> ripository)
+        public SupplierController(ISupplierRepository ripository)
         {
             rpSupplier = ripository;
 
@@ -39,27 +39,27 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Supplier>> Create(Supplier entity)
+        public async Task<ActionResult> Create(Supplier entity)
         {
             if (ModelState.IsValid)
             {
-                var createdEntity = await rpSupplier.AddAsync(entity);
+                var createdEntity = await rpSupplier.CreateAsync(entity);
                 return Ok(createdEntity);
             }
-                return BadRequest();
+            return BadRequest();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Supplier>> Update(int id, Supplier entity)
+        public async Task<ActionResult> Update(int id, Supplier entity)
         {
-          
+
             var updatedEntity = await rpSupplier.UpdateAsync(id, entity);
             return Ok(updatedEntity);
-            
+
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Supplier>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var entity = await rpSupplier.GetByIdAsync(id);
             if (entity != null)
@@ -67,7 +67,7 @@ namespace R53_GroubB_GadgetPoint.Controllers
                 await rpSupplier.DeleteAsync(entity);
                 return Ok();
             }
-            
+
             return NotFound();
         }
 

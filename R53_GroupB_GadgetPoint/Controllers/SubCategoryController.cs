@@ -9,9 +9,9 @@ namespace R53_GroubB_GadgetPoint.Controllers
     [ApiController]
     public class SubCategoryController : ControllerBase
     {
-        private IGenericRepository<SubCategory> rpSubCategory;
+        private ISubCategoryRepository rpSubCategory;
 
-        public SubCategoryController(IGenericRepository<SubCategory> ripository)
+        public SubCategoryController(ISubCategoryRepository ripository)
         {
             rpSubCategory = ripository;
 
@@ -37,18 +37,18 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<SubCategory>> Create(SubCategory entity)
+        public async Task<ActionResult> Create(SubCategory entity)
         {
             if (ModelState.IsValid)
             {
-                var createdEntity = await rpSubCategory.AddAsync(entity);
+                var createdEntity = await rpSubCategory.CreateAsync(entity);
                 return Ok(createdEntity);
             }
             return BadRequest();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<SubCategory>> Update(int id, SubCategory entity)
+        public async Task<ActionResult> Update(int id, SubCategory entity)
         {
 
             var updatedEntity = await rpSubCategory.UpdateAsync(id, entity);
@@ -57,7 +57,7 @@ namespace R53_GroubB_GadgetPoint.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<SubCategory>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var entity = await rpSubCategory.GetByIdAsync(id);
             if (entity != null)
