@@ -32,7 +32,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return entity;
         }
 
-        public async Task<Payment> GetByIdAsync(int id)
+        public async Task<Payment?> GetByIdAsync(int id)
         {
             return await _context.Payments.FindAsync(id);
 
@@ -43,7 +43,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return await _context.Payments.ToListAsync();
         }
 
-        public async Task<Payment> UpdateAsync(int id, Payment entity)
+        public async Task<Payment?> UpdateAsync(int id, Payment entity)
         {
             var exentity = await _context.Payments.FindAsync(id);
             if (exentity != null)

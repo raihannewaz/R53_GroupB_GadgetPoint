@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -16,13 +17,16 @@ namespace Project_Entity.Models
         public string? ProductImage { get; set; }
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
         public int SubCategoryId { get; set; }
-        public SubCategory SubCategory { get; set; }
+        public SubCategory? SubCategory { get; set; }
 
         public int BrandId { get; set; }
-        public Brand Brand { get; set; }
+        public Brand? Brand { get; set; }
+
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
 
 
     }

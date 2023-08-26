@@ -18,7 +18,7 @@ namespace Project_Entity.Models
         public int OrderId { get; set; }
 
         public int? CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public Customer? Customer { get; set; }
 
         public string? CustomerType{ get; set; }
 
@@ -28,7 +28,7 @@ namespace Project_Entity.Models
 
 
         public int PaymentId { get; set; }
-        public Payment Payment { get; set; }
+        public Payment? Payment { get; set; }
 
         public virtual List<OrderDetail> OrderDetail { get; set; } = new List<OrderDetail>();
 
