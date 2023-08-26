@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_Entity.Context;
 using Project_Entity.Models;
+using R53_GroupB_GadgetPoint.DAL.Interface;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository:ICustomerRepository
     {
         private readonly StoreContext _context;
 
