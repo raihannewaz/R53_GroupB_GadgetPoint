@@ -5,54 +5,54 @@ using R53_GroupB_GadgetPoint.DAL.Interface;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
-    public class BrandRepository : IBrandRepository
+    public class PaymentRepository:IPaymentRepository
     {
         private readonly StoreContext _context;
 
-        public BrandRepository(StoreContext store)
+        public PaymentRepository(StoreContext store)
         {
             _context = store;
         }
 
-        public async Task<Brand> CreateAsync(Brand entity)
+        public async Task<Payment> CreateAsync(Payment entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            await _context.Brands.AddAsync(entity);
+            await _context.Payments.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<Brand> DeleteAsync(Brand entity)
+        public async Task<Payment> DeleteAsync(Payment entity)
         {
-             _context.Brands.Remove(entity);
+            _context.Payments.Remove(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<Brand> GetByIdAsync(int id)
+        public async Task<Payment> GetByIdAsync(int id)
         {
-            return  await _context.Brands.FindAsync(id);
- 
+            return await _context.Payments.FindAsync(id);
+
         }
 
-        public async Task<IReadOnlyList<Brand>> ListAllAsync()
+        public async Task<IReadOnlyList<Payment>> ListAllAsync()
         {
-            return await _context.Brands.ToListAsync();
+            return await _context.Payments.ToListAsync();
         }
 
-        public async Task<Brand> UpdateAsync(int id, Brand entity)
+        public async Task<Payment> UpdateAsync(int id, Payment entity)
         {
-             var exentity = await _context.Brands.FindAsync(id);
+            var exentity = await _context.Payments.FindAsync(id);
             if (exentity != null)
             {
                 _context.Entry(exentity).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
             }
             return exentity;
-           
+
         }
     }
 }
