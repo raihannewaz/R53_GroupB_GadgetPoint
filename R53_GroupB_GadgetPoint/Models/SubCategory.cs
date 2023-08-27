@@ -7,7 +7,7 @@ namespace Project_Entity.Models
     {
        [Key]
        public int SubCategoryId { get; set; }
-       public string? SubCategoryName { get; set;}
+       public string SubCategoryName { get; set;}
 
 
 

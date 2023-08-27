@@ -19,9 +19,9 @@ namespace Project_Entity.Models
         [Key]
         public int PackAndDeliveryId { get; set; }
 
-        public string? DeliveryStatus { get; set; }
+        public string DeliveryStatus { get; set; }
 
-        public int? OrderId { get; set; }
-        public Order? Order { get; set; }
+        public int OrderId { get; set; }
+        public Order Order { get; set; }
     }
 }

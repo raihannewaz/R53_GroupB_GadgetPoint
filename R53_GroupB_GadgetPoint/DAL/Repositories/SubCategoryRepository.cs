@@ -32,7 +32,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return entity;
         }
 
-        public async Task<SubCategory?> GetByIdAsync(int id)
+        public async Task<SubCategory> GetByIdAsync(int id)
         {
             return await _context.SubCategories.FindAsync(id);
 
@@ -43,7 +43,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return await _context.SubCategories.ToListAsync();
         }
 
-        public async Task<SubCategory?> UpdateAsync(int id, SubCategory entity)
+        public async Task<SubCategory> UpdateAsync(int id, SubCategory entity)
         {
             var exentity = await _context.SubCategories.FindAsync(id);
             if (exentity != null)

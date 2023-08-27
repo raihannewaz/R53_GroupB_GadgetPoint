@@ -19,12 +19,12 @@ namespace Project_Entity.Models
         public int InspectionId { get; set; }
 
         public int RequistionId { get; set; }
-        public Requisition? Requisition { get; set; }
+        public Requisition Requisition { get; set; }
 
         public DateTime InspectionDate { get; set; }
 
-        public string? InspectionNote { get; set; }
+        public string InspectionNote { get; set; }
 
-        public string? InsepectionStatus { get; set; } //enum
+        public string InsepectionStatus { get; set; } //enum
     }
 }
