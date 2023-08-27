@@ -19,12 +19,12 @@ namespace Project_Entity.Models
         public int ReturnId { get; set; }
 
         public int InvoiceId { get; set; }
-        public Invoice? Invoice { get; set; }
+        public Invoice Invoice { get; set; }
 
         public int OrderId { get; set; }
-        public Order? Order { get; set; }
+        public Order Order { get; set; }
 
-        public string? ReturnReason { get; set; }
+        public string ReturnReason { get; set; }
 
         
     }

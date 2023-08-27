@@ -2,6 +2,7 @@
 using Project_Entity.Context;
 using Project_Entity.Models;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
@@ -32,7 +33,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return entity;
         }
 
-        public async Task<Product?> GetByIdAsync(int id)
+        public async Task<Product> GetByIdAsync(int id)
         {
             return await _context.Products.Include(c=>c.Category)
                 .Include(sc=>sc.SubCategory)
@@ -41,6 +42,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         }
 
+
         public async Task<IReadOnlyList<Product>> ListAllAsync()
         {
             return await _context.Products.Include(c => c.Category)
@@ -48,7 +50,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                 .Include(b => b.Brand).ToListAsync();
         }
 
-        public async Task<Product?> UpdateAsync(int id, Product entity)
+        public async Task<Product> UpdateAsync(int id, Product entity)
         {
             var exentity = await _context.Products.FindAsync(id);
             if (exentity != null)
@@ -58,6 +60,22 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             }
             return exentity;
 
+        }
+
+
+        public async Task<IReadOnlyList<Product>> GetAllProduct(ISpecification<Product> spec)
+        {
+            return await ApplySpec(spec).ToListAsync();
+        }
+
+        public async Task<Product> GetSpecProduct(ISpecification<Product> spec)
+        {
+            return await ApplySpec(spec).FirstOrDefaultAsync();
+        }
+
+        private IQueryable<Product> ApplySpec(ISpecification<Product> spec)
+        {
+            return SpecificationEvaluator<Product>.GetQuery(_context.Products.AsQueryable(), spec);
         }
     }
 }

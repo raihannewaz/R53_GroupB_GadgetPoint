@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Project_Entity.Models;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
 using R53_GroupB_GadgetPoint.DTOs;
+
 
 namespace R53_GroupB_GadgetPoint.Controllers
 {
@@ -19,9 +21,10 @@ namespace R53_GroupB_GadgetPoint.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDTO>>> Get()
+        public async Task<ActionResult<List<ProductDTO>>> GetAll(string sort, int? brandId, int? categoryId,int? subCatId)
         {
-            var entities = await rpProduct.ListAllAsync();
+            var spec = new SpecificProduct(sort,brandId,categoryId,subCatId);
+            var entities = await rpProduct.GetAllProduct(spec);
             return entities.Select(p=>new ProductDTO
             {
                 ProductId = p.ProductId,
@@ -35,18 +38,30 @@ namespace R53_GroupB_GadgetPoint.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(int id)
+        public async Task<ActionResult<ProductDTO>> GetById(int id)
         {
-            var entity = await rpProduct.GetByIdAsync(id);
-            if (entity == null)
+            var spec = new SpecificProduct(id);
+
+            var p = await rpProduct.GetSpecProduct(spec);
+            if (p == null)
             {
                 return NotFound();
             }
-            return Ok(entity);
+            return new ProductDTO
+            {
+                ProductId = p.ProductId,
+                ProdcutName = p.ProdcutName,
+                Description = p.Description,
+                Price = p.Price,
+                ProductImage = p.ProductImage,
+                Category = p.Category?.CategoryName,
+                SubCategory = p.SubCategory?.SubCategoryName,
+                Brand = p.Brand?.BrandName
+            };
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromForm]Product entity)
+        public async Task<ActionResult> Create(Product entity)
         {
             if (ModelState.IsValid)
             {
