@@ -46,7 +46,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Product entity)
+        public async Task<ActionResult> Create([FromForm]Product entity)
         {
             if (ModelState.IsValid)
             {
