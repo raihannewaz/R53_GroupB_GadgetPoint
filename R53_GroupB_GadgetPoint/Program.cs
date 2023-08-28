@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Project_Entity.Context;
+using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
 using R53_GroupB_GadgetPoint.DAL.Repositories;
 
@@ -25,6 +26,21 @@ builder.Services.AddScoped(typeof(IPaymentRepository), typeof(PaymentRepository)
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<StoreContext>();
+    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+
+    dbContext.Database.EnsureDeleted();
+    dbContext.Database.EnsureCreated();
+
+    // Seed data
+    await StoreContextSeed.SeedAsync(dbContext, loggerFactory);
+}
+
 
 app.UseCors(b=>b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 

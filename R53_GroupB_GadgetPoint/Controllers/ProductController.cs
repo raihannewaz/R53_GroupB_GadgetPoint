@@ -28,7 +28,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
             return entities.Select(p=>new ProductDTO
             {
                 ProductId = p.ProductId,
-                ProdcutName = p.ProdcutName,
+                ProdcutName = p.ProductName,
                 Description = p.Description,
                 Price = p.Price,
                 ProductImage = p.ProductImage,
@@ -50,7 +50,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
             return new ProductDTO
             {
                 ProductId = p.ProductId,
-                ProdcutName = p.ProdcutName,
+                ProdcutName = p.ProductName,
                 Description = p.Description,
                 Price = p.Price,
                 ProductImage = p.ProductImage,
@@ -61,7 +61,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Product entity)
+        public async Task<ActionResult> Create([FromForm]Product entity)
         {
             if (ModelState.IsValid)
             {

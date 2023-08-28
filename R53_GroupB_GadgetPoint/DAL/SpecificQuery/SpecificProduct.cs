@@ -13,7 +13,7 @@ namespace R53_GroupB_GadgetPoint.DAL.SpecificQuery
             AddInclude(x => x.Category);
             AddInclude(x => x.SubCategory);
             AddInclude(x => x.Brand);
-            AddOrderBy(x=>x.ProdcutName);
+            AddOrderBy(x=>x.ProductName);
 
             if (!string.IsNullOrEmpty(sort))
             {
@@ -26,7 +26,7 @@ namespace R53_GroupB_GadgetPoint.DAL.SpecificQuery
                         AddOrderByDesc(p => p.Price);
                         break;
                     default:
-                        AddOrderBy(n => n.ProdcutName);
+                        AddOrderBy(n => n.ProductName);
                         break;
                 }
 
