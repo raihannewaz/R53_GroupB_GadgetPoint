@@ -1,0 +1,130 @@
+[
+  {
+    "ProductName": "Lenovo IdeaPad D330 10IGL Intel CDC N4020 10.1 HD Touch Laptop",
+    "Description": "The Ideapad D330 has computing power and all the fun and mobility of a lightweight tablet. From multitasking to connecting with friends online and streaming shows. This Ideapad D330 featured 4GB DDR4 RAM, 128GB eMMC and Intel UHD 600 Graphics, and Windows 10 Home. The Lenovo Ideapad D330 comes with 10.1 (1280 x 800) HD IPS WXGA LED Antiscratch Brightness: 300nits, Aspect Ratio: 16:10, Color Gamut: 50% NTSC Display. This Lenovo IdeaPad D330 has an abundance of ports, including a USB-C 3.1 to help you charge other devices or transfer data at speeds up to 10 Gbps. Its display can generate lifelike clarity with 2S stereo Speakers Dolby Premium Audio is the perfect combination for entertainment. This Lenovo IdeaPad D330 10IGL comes with 1 year Limited Warranty (1 year for Battery and Adapter, Terms & Conditions Apply As Per Lenovo)",
+    "Price": 35800,
+    "ProductImage": "ProductImage/d330-2-500x500.jpg",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "BrandId": 1
+  },
+
+  {
+    "ProductName": "Lenovo K14 Core i3 11th Gen 14",
+    "Description": "The Lenovo K14 Laptop is powered by Intel Core i3-1115G4 Processor (6M Cache, 3.00 GHz up to 4.10 GHz), 8GB 3200MHz RAM which is upgradeable up to 20GB. This laptop also has a 512GB M.2 NVME SSD. It has been integrated with Intel Iris Xe Graphics, you can do more with your PC and enjoy a rich entertainment experience. This laptop, also has 3 Cell Li-Polymer, 2 x 1.5W speakers, and Dolby Audio. This laptop also featured with 14 FHD (1920 x 1080) IPS, 200 nits, 45% NTSC, Full size English (US) keyboard, SD card reader, Bluetooth Version 5.0, WiFi 5 x 2, 1 x 1 AC, Headphone / mic combo with HDMI 1.4b ,2 x USB 3.1 (Gen 1) and USB 2.0 port.  The Lenovo K14 laptop offers 3 Years Warranty (Battery & Adapter 1 Year).",
+    "Price": 66500,
+    "ProductImage": "ProductImage/k14-01-500x500.jpg",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "BrandId": 1
+  },
+
+  {
+    "ProductName": "HP 15s-fq5487TU Core i3 12th Gen 15.6 FHD Laptop",
+    "Description": "The HP 15s-fq5487TU Laptop comes with Intel Core i3-1215U Processor (10M Cache, up to 4.40 GHz) and 8GB DDR4 RAM. It has a 256GB PCIe NVMe M.2 SSD. This laptop has been integrated with Intel UHD Graphics and features a 15.6 diagonal, FHD (1920 x 1080), micro-edge, anti-glare, 250 nits, 45% NTSC Display. It runs on Windows 11 Home Operating system. The whole system is powered by a 3-cell, 41 Wh Li-ion battery. It features an HP True Vision 720p HD camera with integrated dual array digital microphones. This laptop has 1x SuperSpeed USB Type-C 5Gbps signaling rate; 2x SuperSpeed USB Type-A 5Gbps signaling rate; 1x HDMI 1.4b; 1x RJ-45; 1x AC smart pin; 1x headphone/microphone combo. The latest HP 15s-fq5487TU Core i3 12th Gen 15.6 FHD Laptop has 02 years Limited Warranty (Terms & Conditions Apply As Per HP).",
+    "Price": 60900,
+    "ProductImage": "ProductImage/15s-fq5487tu-05-500x500.jpg",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "BrandId": 2
+  },
+
+  {
+    "ProductName": "HP ProBook 455 G9 Ryzen 5 5625U 15.6 FHD Laptop",
+    "Description": "The HP ProBook 455 G9 comes with AMD Ryzen 5 5625U Processor (16MB L3 Cache, 2.3GHz, up to 4.3GHz) with AMD Radeon Graphics. The ProBook 455 G9 has a 15.6 FHD (1920 x 1080) anti-glare, 250 nits, 45% NTSC Display. This laptop comes with 512GB NVMe PCIe SSD storage and 8GB DDR4 3200MHz RAM, which helps to run more efficiently and more reliably at faster speeds with DDR4 RAM, everything from multi-tasking to playing games gets a performance boost. The laptop is powered by a 3-cell, 41 Wh Li-ion battery with long battery life and fast-charge technology, work, watch, and you can stay connected all day. This laptop runs on Windows 11 Home operating system. This laptop has 3 SuperSpeed USB Type-A 5Gbps signaling rate; 1 SuperSpeed USB Type-C 10Gbps signaling rate (USB Power Delivery, DisplayPort 1.4); 1 headphone/microphone combo; 1 HDMI 2.0b; 1 AC power. This Hp Laptop is also equipped with Realtek RTL8852BE 802.11ax (2x2) Wi-Fi and Bluetooth 5.2 combo (Supporting Gigabit data rate) wireless network connectivity. It comes with HP True Vision 720p HD camera with integrated dual array digital microphones and a TouchPad keyboard. The new HP ProBook 455 G9 laptop is designed with a simply gorgeous look. It is the perfect choice for your daily office work and home use. This Integrated precision touchpad featured with multi-touch support speeds up navigation and productivity. The HP ProBook 455 G9 Laptop has 03 years Limited Warranty (Terms & Conditions Apply As Per HP, Battery Adapter 1 year).",
+    "Price": 85900,
+    "ProductImage": "ProductImage/probook-455-g9-01-500x500.jpg",
+    "CategoryId": 1,
+    "SubCategoryId": 2,
+    "BrandId": 2
+  },
+
+  {
+    "ProductName": "Dell Vostro 14 3400 Core i3 11th Gen 14 HD Laptop",
+    "Description": "Dell Vostro 14 3400 Laptop comes with the Intel Core i3-1115G4 Processor (6MB Cache, 3.0 GHz up to 4.10 GHz) and 4GB DDR4 2666MHz RAM. It has a 1TB 5400 rpm 2.5 SATA Hard Drive. It is featured Intel UHD Graphics. It has a 14.0-inch HD (1366 x 768), 60 Hz, Anti-glare, NTSC 45%, 220 Nits, LED Backlight Non-touch Narrow Border Display. It features built-in 802.11ac 1x1 WiFi and Bluetooth. It comes with 1x USB 2.0, 1x HDMI 1.4, 1x Ethernet RJ-45, 2x USB 3.2 Gen 1 Type-A, 1x Headset Jack, 1x Power In ports, and 1x 3-in-1 SD Media Card Reader, 1x Wedge-Shaped Lock Slot. It is powered by 3-Cell, 42 WHr, Integrated battery. Dell Vostro 14 3400 Core i3 Laptop has 3 years warranty (battery adapter 1 year).",
+    "Price": 48500,
+    "ProductImage": "ProductImage/vostro-14-3400-black-side-500x500.jpg",
+    "CategoryId": 1,
+    "SubCategoryId": 2,
+    "BrandId": 3
+  },
+
+  {
+    "ProductName": "Dell Latitude 14 3420 Core i5 11th Gen 14 FHD Laptop",
+    "Description": "The Dell Latitude 14 3420 Laptop comes with Intel Core i5-1135G7 Processor (8MB Cache, 2.40 GHz up to 4.20 GHz) and 8 GB 3200MHz DDR4 RAM. It has a 512GB M.2 PCIe NVMe SSD. The laptop is integrated with Intel Iris Xe Graphics. It has a 14 FHD (1920 x 1080) AG Non-Touch, 250nits Display. It offers intelligent audio that enhances your audio quality and reduces background noises, so you can hear and be heard, creating a better conference experience for all. You can seamlessly work on the go thanks to eSIM technology and optional LTE mobile broadband speeds up to 450Mbps. Intel Wi-Fi 6 capability provides reliable connectivity, fast speeds, and next-gen security to PCs and wireless networks. It is featured with a full range of available ports, including USB 3.2 Gen2x2 Type-C ports and legacy ports like HDMI and RJ45. This laptop supports Free DOS.3 Cell 42Whr ExpressCharge Capable Battery. The Dell Latitude 14 3420 has a 3 Years Warranty (Battery & Adapter 1 year).",
+    "Price": 82500,
+    "ProductImage": "ProductImage/latitude-3420-01-500x500.jpg",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "BrandId": 3
+  },
+
+  {
+    "ProductName": "Huawei Nova 10 Youth",
+    "Description": "The Nova 10 Youth was launched with a model number unknown. Firstly, Its dimensional measure is 164.6 x 75.6 x 7.9 mm and the weight is 191 in grams. Secondly, the display of Nova 10 Youth is a 6.67-inch quad panel with a 1200 x 2652 pixels resolution. The display is protected from the unknown. Thirdly and most importantly, It is powered by the Qualcomm Snapdragon 680G 4G (6 nm) and runs with HarmonyOS 2.0. Moreover, it has an Octa-core (4×2.4 GHz Cortex-A73 & 4×1.9 GHz Cortex-A53) CPU.",
+    "Price": 30000,
+    "ProductImage": "ProductImage/Huawei-Nova-10-Youth-Blue.jpg",
+    "CategoryId": 2,
+    "SubCategoryId": 2,
+    "BrandId": 4
+  },
+
+  {
+    "ProductName": "Huawei Nova Y91",
+    "Description": "The Nova Y91 was launched with model numbers STG-LX1, STG-LX2. Firstly, Its dimensional measure is 171.6 x 79.9 x 8.9 mm and the weight is 214 grams. Secondly, the display of Nova Y91 is a 6.95-inch IPS LCD panel with 1080 x 2376 pixels resolution. The display is protected from the unknown. Thirdly and most importantly, It is powered by the Unspecified and runs with Qualcomm Snapdragon 680 4G (6 nm). Moreover, it has up to an Octa-core (4×2.4 GHz Cortex-A73 & 4×1.9 GHz Cortex-A53) CPU.",
+    "Price": 35000,
+    "ProductImage": "ProductImage/Huawei-nova-Y91-Black.jpg",
+    "CategoryId": 2,
+    "SubCategoryId": 4,
+    "BrandId": 4
+  },
+
+  {
+    "ProductName": "Xiaomi Redmi Note 12T Pro",
+    "Description": "The Redmi 12T Pro was launched with the model number unknown. Firstly, Its dimensional measure is unknown and the weight is unknown grams. Secondly, the Redmi Note 12T Pro display is a 6.6-inch IPS LCD panel with 1080 x 2400 pixels resolution. The display is protected with Corning Gorilla Glass. Thirdly and most importantly, It is powered by the Mediatek Dimensity 8200 Ultra (4 nm) and runs with Android 13. Moreover, it has up to an Octa-core (1×3.1 GHz Cortex-A78 & 3×3.0 GHz Cortex-A78 & 4×2.0 GHz Cortex-A55) CPU.",
+    "Price": 40000,
+    "ProductImage": "ProductImage/Xiaomi-Redmi-Note-12T-Pro-Black.jpg",
+    "CategoryId": 2,
+    "SubCategoryId": 4,
+    "BrandId": 5
+  },
+
+  {
+    "ProductName": "Xiaomi Redmi 12R",
+    "Description": "The Redmi 12R was launched with the model number unknown. Firstly, Its dimensional measure is 168.6 x 76.3 x 8.2 mm and the weight is 199g in grams. Secondly, the Redmi 12R display is a 6.79-inch IPS LCD panel with 1080 x 2400 pixels resolution. The display is protected with Corning Gorilla Glass. Thirdly and most importantly, It is powered by the Snapdragon 4 Gen 2 and runs with Android 13. Moreover, it has an unknown CPU.",
+    "Price": 20000,
+    "ProductImage": "ProductImage/Xiaomi-Redmi-12R-Sky-Fantasy.jpg",
+    "CategoryId": 2,
+    "SubCategoryId": 4,
+    "BrandId": 5
+  },
+
+  {
+    "ProductName": "Samsung Galaxy M14",
+    "Description": "The Galaxy M14 launched with a model number unknown. Firstly, Its dimensional measure is 166.8 x 77.2 x 9.4 mm and the weight is 206 in grams. Secondly, the display of Galaxy M14 is a 6.6-inch PLS LCD panel with 1080 x 2408 pixels resolution. The display is protecting from the unknown. Thirdly and most importantly, It is powered by the Exynos 1330 and runs with Android 13. Moreover, it has an Octa-core (2×2.4 GHz & 6×2.0 GHz) CPU.",
+    "Price": 19000,
+    "ProductImage": "ProductImage/Samsung-Galaxy-M14-Light-Blue.jpg",
+    "CategoryId": 2,
+    "SubCategoryId": 4,
+    "BrandId": 6
+  },
+  {
+    "ProductName": "Samsung Galaxy A14 5G",
+    "Description": "The Galaxy A14 5G launched with a model number SM-A146B, SM-A146B/DS, SM-A146P, SM-A146P/DS. Firstly, Its dimensional measure is unknown and the weight is unknown in grams. Secondly, the display of Galaxy A14 5G is a 6.6-inch PLS IPS panel with 1080 x 2400 pixels resolution. The display is protecting from the unknown. Thirdly and most importantly, It is powered by the Exynos 1330 – SM-A146B and runs with Android 13. Moreover, it has an Octa-core CPU.",
+    "Price": 23999,
+    "ProductImage": "ProductImage/Samsung-G-A14-5G.jpg",
+    "CategoryId": 2,
+    "SubCategoryId": 4,
+    "BrandId": 6
+  },
+  {
+    "ProductName": "Apple iPhone 14 Pro Max",
+    "Description": "Apple iPhone 14 Pro Max comes with a 6.7 inches LTPO Super Retina XDR OLED 1290 x 2796 pixels screen. It has a double punch-hole design. The back camera is of quad 48+12+12 Megapixel + TOF 3D LiDAR scanner with powerful image processing capability and 4K video recording. The front one is of Dual 12 MP and SL 3D camera. Apple iPhone 14 Pro Max comes with – mAh battery with – fast charging solution. It has 6 GB RAM, up to 3.46 GHz Hexa-core CPU and Apple GPU. It is powered by a 4 nm Apple A16 Bionic chipset. The device comes with 128, 256, 512 GB or 1 TB internal storage.",
+    "Price": 196599,
+    "ProductImage": "ProductImage/0000472_iphone-14-pro_550.jpg",
+    "CategoryId": 2,
+    "SubCategoryId": 3,
+    "BrandId": 7
+  }
+
+]

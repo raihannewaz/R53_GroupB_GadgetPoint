@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Project_Entity.Context;
 using Project_Entity.Models;
 using R53_GroupB_GadgetPoint.DAL.Interface;
@@ -9,10 +10,12 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly StoreContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ProductRepository(StoreContext store)
+        public ProductRepository(StoreContext store, IWebHostEnvironment hostEnvironment)
         {
             _context = store;
+            _hostEnvironment = hostEnvironment;
         }
 
         public async Task<Product> CreateAsync(Product entity)
@@ -21,6 +24,12 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             {
                 throw new ArgumentNullException(nameof(entity));
             }
+
+            if (entity.ImageFile != null)
+            {
+                entity.ProductImage = await UploadImageAsync(entity.ImageFile);
+            }
+
             await _context.Products.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
@@ -55,12 +64,31 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             var exentity = await _context.Products.FindAsync(id);
             if (exentity != null)
             {
+                if (entity.ImageFile != null)
+                {
+                    exentity.ProductImage = await UploadImageAsync(entity.ImageFile);
+                }
+
                 _context.Entry(exentity).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
             }
             return exentity;
 
         }
+        private async Task<string> UploadImageAsync(IFormFile imageFile)
+        {
+            string uploadsFolder = Path.Combine(_hostEnvironment.ContentRootPath, "ProductImage");
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+
+            return uniqueFileName;
+        }
+
 
 
         public async Task<IReadOnlyList<Product>> GetAllProduct(ISpecification<Product> spec)

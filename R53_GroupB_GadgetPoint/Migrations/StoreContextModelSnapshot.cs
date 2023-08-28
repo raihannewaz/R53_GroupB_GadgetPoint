@@ -8,7 +8,7 @@ using Project_Entity.Context;
 
 #nullable disable
 
-namespace R53_GroubB_GadgetPoint.Migrations
+namespace R53_GroupB_GadgetPoint.Migrations
 {
     [DbContext(typeof(StoreContext))]
     partial class StoreContextModelSnapshot : ModelSnapshot
@@ -145,7 +145,6 @@ namespace R53_GroubB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
                     b.Property<int?>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("CustomerType")
@@ -209,8 +208,7 @@ namespace R53_GroubB_GadgetPoint.Migrations
                     b.Property<string>("DeliveryStatus")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .IsRequired()
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.HasKey("PackAndDeliveryId");
@@ -256,10 +254,10 @@ namespace R53_GroubB_GadgetPoint.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ProdcutName")
+                    b.Property<string>("ProductImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductImage")
+                    b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubCategoryId")
@@ -443,8 +441,7 @@ namespace R53_GroubB_GadgetPoint.Migrations
                     b.HasOne("Project_Entity.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Project_Entity.Models.Payment", "Payment")
                         .WithMany()
