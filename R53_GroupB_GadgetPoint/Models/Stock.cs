@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Project_Entity.Models
+namespace R53_GroupB_GadgetPoint.Models
 {
     public class Stock
     {
@@ -17,7 +17,7 @@ namespace Project_Entity.Models
 
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
-        
+
         public int StockQuantity { get; set; }
 
         public decimal PurchasePrice { get; set; }

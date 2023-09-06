@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
-using Project_Entity.Context;
-using Project_Entity.Models;
+using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
 using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
+using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
@@ -90,20 +90,24 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         }
 
 
-
-        public async Task<IReadOnlyList<Product>> GetAllProduct(ISpecification<Product> spec)
+        private IQueryable<Product> ApplySpec(ISpecification<Product> spec)
         {
-            return await ApplySpec(spec).ToListAsync();
+            return SpecificationEvaluator<Product>.GetQuery(_context.Products.AsQueryable(), spec);
         }
 
-        public async Task<Product> GetSpecProduct(ISpecification<Product> spec)
+        public async Task<Product> GetEntityWithSpec(ISpecification<Product> spec)
         {
             return await ApplySpec(spec).FirstOrDefaultAsync();
         }
 
-        private IQueryable<Product> ApplySpec(ISpecification<Product> spec)
+        public async Task<IReadOnlyList<Product>> ListAsync(ISpecification<Product> spec)
         {
-            return SpecificationEvaluator<Product>.GetQuery(_context.Products.AsQueryable(), spec);
+            return await ApplySpec(spec).ToListAsync();
+        }
+
+        public Task<int> CountAsync(ISpecification<Product> spec)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Project_Entity.Context;
-using Project_Entity.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using R53_GroupB_GadgetPoint.Models;
 using System.Text.Json;
 
 namespace R53_GroupB_GadgetPoint.Context
@@ -8,19 +8,19 @@ namespace R53_GroupB_GadgetPoint.Context
     {
         public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
         {
-			try
-			{
-				if (!context.Brands.Any())
-				{
-					var brandData = File.ReadAllText("SeedData/brands.json");
-					var brands = JsonSerializer.Deserialize<List<Brand>>(brandData);
+            try
+            {
+                if (!context.Brands.Any())
+                {
+                    var brandData = File.ReadAllText("SeedData/brands.json");
+                    var brands = JsonSerializer.Deserialize<List<Brand>>(brandData);
 
-					foreach ( var brand in brands )
-					{
-						context.Brands.Add(brand);
-					}
-					await context.SaveChangesAsync();
-				}
+                    foreach (var brand in brands)
+                    {
+                        context.Brands.Add(brand);
+                    }
+                    await context.SaveChangesAsync();
+                }
 
                 if (!context.Categories.Any())
                 {
@@ -58,12 +58,50 @@ namespace R53_GroupB_GadgetPoint.Context
                     context.SaveChanges();
                 }
 
+                if (!context.DeliveryMethods.Any())
+                {
+                    var deliveryMethod = File.ReadAllText("SeedData/delivery.json");
+                    var method = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethod);
+
+                    foreach (var methods in method)
+                    {
+                        context.DeliveryMethods.Add(methods);
+                    }
+                    context.SaveChanges();
+                }
+
             }
             catch (JsonException ex)
             {
                 var logger = loggerFactory.CreateLogger<StoreContextSeed>();
                 logger.LogError(ex, "JSON deserialization error: " + ex.Message);
             }
+
+        }
+
+        public static async Task SeedUserAsync(UserManager<AppUser> userMgr)
+        {
+            if (!userMgr.Users.Any())
+            {
+                var user = new AppUser()
+                {
+                    DisplayName = "ESAD R53",
+                    Email = "admin@test.com",
+                    UserName = "admin@test.com",
+                    Address = new Address()
+                    {
+                        FirstName = "ESAD",
+                        LastName = "R53",
+                        Street = "NVIT Nasirabad",
+                        City = "Chattogram",
+                        State = "CTG",
+                        Zipcode = "4000"
+                    }
+                };
+
+                await userMgr.CreateAsync(user, "Admin@123");
+            }
+
 
         }
     }

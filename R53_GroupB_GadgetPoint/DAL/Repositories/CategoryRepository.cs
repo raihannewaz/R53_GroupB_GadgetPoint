@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project_Entity.Context;
-using Project_Entity.Models;
+using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
+using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
@@ -12,6 +13,11 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         public CategoryRepository(StoreContext store)
         {
             _context = store;
+        }
+
+        public Task<int> CountAsync(ISpecification<Category> spec)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Category> CreateAsync(Category entity)
@@ -38,9 +44,19 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         }
 
+        public Task<Category> GetEntityWithSpec(ISpecification<Category> spec)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IReadOnlyList<Category>> ListAllAsync()
         {
             return await _context.Categories.ToListAsync();
+        }
+
+        public Task<IReadOnlyList<Category>> ListAsync(ISpecification<Category> spec)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Category> UpdateAsync(int id, Category entity)
