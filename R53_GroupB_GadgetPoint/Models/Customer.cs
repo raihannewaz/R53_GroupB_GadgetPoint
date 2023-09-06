@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Project_Entity.Models
+namespace R53_GroupB_GadgetPoint.Models
 {
-    public class Customer
+    public class Customer: IdentityUser
     {
         [Key]
         public int CustomerId { get; set; }

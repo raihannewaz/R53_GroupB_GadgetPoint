@@ -1,36 +1,63 @@
-﻿using System;
+﻿using R53_GroubB_GadgetPoint.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Project_Entity.Models
+namespace R53_GroupB_GadgetPoint.Models
 {
     public enum CustomerType
     {
-       Online,
-       Offline
+        Online,
+        Offline
     }
 
     public class Order
     {
+        public Order()
+        {
+        }
+
+        public Order(IReadOnlyList<OrderItem> orderItems, string customerEmail, ShippingAddress shippingAddress, DeliveryMethod deliveryMethod,  decimal subtotal)
+        {
+            CustomerEmail = customerEmail;
+            ShippingAddress = shippingAddress;
+            DeliveryMethod = deliveryMethod;
+            OrderItems = orderItems;
+            Subtotal = subtotal;
+        }
+
         [Key]
         public int OrderId { get; set; }
 
-        public int? CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        //public int CustomerId { get; set; }
+        //public Customer Customer { get; set; }
 
-        public string CustomerType{ get; set; }
+        //public string CustomerType { get; set; }
 
-        public DateTime OrderDate { get; set; }
+        public string CustomerEmail { get; set; }
 
-        public string ShippingAddress { get; set; }
+        public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
 
+        public ShippingAddress ShippingAddress { get; set; }
 
-        public int PaymentId { get; set; }
-        public Payment Payment { get; set; }
+        public DeliveryMethod DeliveryMethod { get; set; }
 
-        public virtual List<OrderDetail> OrderDetail { get; set; } = new List<OrderDetail>();
+        public IReadOnlyList<OrderItem> OrderItems { get; set; }
+
+        public decimal Subtotal { get; set; }
+        //public int PaymentId { get; set; }
+        //public Payment Payment { get; set; }
+
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
+
+        public string? PaymentIntentId { get; set; }
+
+        public decimal GetSubTotal()
+        {
+            return Subtotal + DeliveryMethod.Price;
+        }
 
     }
 }

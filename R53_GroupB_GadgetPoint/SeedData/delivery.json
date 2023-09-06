@@ -1,0 +1,30 @@
+[
+  {
+
+    "ShortName": "RedX",
+    "Description": "Fastest delivery time",
+    "DeliveryTime": "1-2 Days",
+    "Price": 120
+  },
+  {
+
+    "ShortName": "SA",
+    "Description": "Get it within 5 days",
+    "DeliveryTime": "2-5 Days",
+    "Price": 80
+  },
+  {
+
+    "ShortName": "Shundarban",
+    "Description": "Slower but cheap",
+    "DeliveryTime": "5-7 Days",
+    "Price": 50
+  },
+  {
+
+    "ShortName": "FREE",
+    "Description": "Free! You get what you pay for",
+    "DeliveryTime": "1-2 Weeks",
+    "Price": 0
+  }
+]

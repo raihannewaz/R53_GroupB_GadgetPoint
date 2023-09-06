@@ -1,21 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Project_Entity.Models;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using R53_GroubB_GadgetPoint.Models;
+using R53_GroupB_GadgetPoint.Models;
 
-namespace Project_Entity.Context
+namespace R53_GroupB_GadgetPoint.Context
 {
-    public class StoreContext : DbContext
+    public class StoreContext : IdentityDbContext<AppUser>
     {
         public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
 
         }
- 
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<Requisition> Requisitions { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Inspection> Inspections { get; set; }
@@ -23,12 +25,15 @@ namespace Project_Entity.Context
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Return> Returns { get; set; }
         public DbSet<Stock> Stocks { get; set; }
-        public DbSet<PackAndDelivery> PackAndDeliveries { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<CustomerBasket> CustomerBasket { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<CustomerBasket>().HasNoKey();
 
             //product relation
             modelBuilder.Entity<Product>().HasOne(c => c.Category).WithMany().HasForeignKey(c => c.CategoryId).OnDelete(DeleteBehavior.Restrict);
@@ -59,18 +64,54 @@ namespace Project_Entity.Context
             //Invoice relation
             modelBuilder.Entity<Invoice>().HasOne(o => o.Order).WithMany().HasForeignKey(o => o.OrderId).OnDelete(DeleteBehavior.Restrict);
 
-            //packdelivery relation
-            modelBuilder.Entity<PackAndDelivery>().HasOne(o => o.Order).WithMany().HasForeignKey(o => o.OrderId).OnDelete(DeleteBehavior.Restrict);
 
 
             //orderdetail relation
-            modelBuilder.Entity<OrderDetail>().HasOne(o => o.Order).WithMany(o => o.OrderDetail).HasForeignKey(o => o.OrderId).OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<OrderDetail>().HasOne(o => o.Order).WithMany(o => o.OrderDetail).HasForeignKey(o => o.OrderId).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Stock>().HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
 
 
+
+
+
+            modelBuilder.Entity<OrderItem>().OwnsOne(i => i.ItemOrdered, io =>
+            {
+                io.WithOwner();
+            });
+
+            modelBuilder.Entity<OrderItem>().Property(i => i.Price).HasColumnType("decimal(18,2)");
+
+
             //order relation
-            modelBuilder.Entity<Order>().HasOne(i => i.Customer).WithMany().HasForeignKey(i => i.CustomerId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Order>().HasOne(o => o.Payment).WithMany().HasForeignKey(o => o.PaymentId).OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Order>().HasOne(i => i.Customer).WithMany().HasForeignKey(i => i.CustomerId).OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Order>().HasOne(o => o.Payment).WithMany().HasForeignKey(o => o.PaymentId).OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>().OwnsOne(o => o.ShippingAddress, a =>
+            {
+                a.WithOwner();
+               
+            });
+
+
+            modelBuilder.Entity<Order>().Property(s => s.Status)
+                .HasConversion(o => o.ToString(), o => (OrderStatus)Enum.Parse(typeof(OrderStatus), o));
+
+            modelBuilder.Entity<Order>().HasMany(o => o.OrderItems).WithOne().OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<DeliveryMethod>().Property(d => d.Price).HasColumnType("decimal(18,2)");
+
+
+            //identity
+            modelBuilder.Entity<AppUser>().HasOne(a => a.Address).WithOne(a => a.AppUser).HasForeignKey<Address>(a => a.AppUserId);
+
+
+
+            modelBuilder.Entity<CustomerBasket>()
+                .HasMany(c => c.BasketItem)
+                .WithOne(b => b.CustomerBasket)
+                .HasForeignKey(b => b.CustomerBasketId);
+
 
 
             base.OnModelCreating(modelBuilder);

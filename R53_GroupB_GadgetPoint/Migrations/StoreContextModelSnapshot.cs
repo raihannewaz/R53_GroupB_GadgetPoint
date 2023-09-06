@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Project_Entity.Context;
+using R53_GroupB_GadgetPoint.Context;
 
 #nullable disable
 
@@ -22,7 +22,321 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Project_Entity.Models.Brand", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("R53_GroubB_GadgetPoint.Models.OrderItem", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"), 1L, 1);
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItem");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Zipcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.BasketItem", b =>
+                {
+                    b.Property<int>("BasketItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketItemId"), 1L, 1);
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerBasketId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PicUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BasketItemId");
+
+                    b.HasIndex("CustomerBasketId");
+
+                    b.ToTable("BasketItems");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Brand", b =>
                 {
                     b.Property<int>("BrandId")
                         .ValueGeneratedOnAdd()
@@ -31,6 +345,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrandId"), 1L, 1);
 
                     b.Property<string>("BrandName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BrandId");
@@ -38,7 +353,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Category", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -47,6 +362,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
 
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
@@ -54,7 +370,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Customer", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -62,22 +378,69 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"), 1L, 1);
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ContactNo")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<string>("FarstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerId");
@@ -85,7 +448,52 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Inspection", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.CustomerBasket", b =>
+                {
+                    b.Property<int>("CustomerBasketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerBasketId"), 1L, 1);
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerBasketId");
+
+                    b.ToTable("CustomerBasket");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.DeliveryMethod", b =>
+                {
+                    b.Property<int>("DelMethId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DelMethId"), 1L, 1);
+
+                    b.Property<string>("DeliveryTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DelMethId");
+
+                    b.ToTable("DeliveryMethods");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Inspection", b =>
                 {
                     b.Property<int>("InspectionId")
                         .ValueGeneratedOnAdd()
@@ -94,12 +502,14 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InspectionId"), 1L, 1);
 
                     b.Property<string>("InsepectionStatus")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("InspectionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("InspectionNote")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RequistionId")
@@ -112,7 +522,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Inspections");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Invoice", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Invoice", b =>
                 {
                     b.Property<int>("InvoiceId")
                         .ValueGeneratedOnAdd()
@@ -136,7 +546,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Invoices");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Order", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -144,81 +554,35 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerType")
+                    b.Property<string>("CustomerEmail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PaymentId")
+                    b.Property<int>("DelivaryMethodDelMethId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ShippingAddress")
+                    b.Property<DateTimeOffset>("OrderDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("PaymentIntentId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Subtotal")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("PaymentId");
+                    b.HasIndex("DelivaryMethodDelMethId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"), 1L, 1);
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("Project_Entity.Models.PackAndDelivery", b =>
-                {
-                    b.Property<int>("PackAndDeliveryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PackAndDeliveryId"), 1L, 1);
-
-                    b.Property<string>("DeliveryStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PackAndDeliveryId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("PackAndDeliveries");
-                });
-
-            modelBuilder.Entity("Project_Entity.Models.Payment", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Payment", b =>
                 {
                     b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
@@ -227,6 +591,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
 
                     b.Property<string>("PaymentMethod")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PaymentId");
@@ -234,7 +599,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Product", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -249,15 +614,18 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductImage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubCategoryId")
@@ -274,7 +642,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Requisition", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Requisition", b =>
                 {
                     b.Property<int>("RequisitionId")
                         .ValueGeneratedOnAdd()
@@ -315,7 +683,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Requisitions");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Return", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Return", b =>
                 {
                     b.Property<int>("ReturnId")
                         .ValueGeneratedOnAdd()
@@ -330,6 +698,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ReturnReason")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ReturnId");
@@ -341,7 +710,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Returns");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Stock", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Stock", b =>
                 {
                     b.Property<int>("StockId")
                         .ValueGeneratedOnAdd()
@@ -373,7 +742,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Stocks");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.SubCategory", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.SubCategory", b =>
                 {
                     b.Property<int>("SubCategoryId")
                         .ValueGeneratedOnAdd()
@@ -382,6 +751,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategoryId"), 1L, 1);
 
                     b.Property<string>("SubCategoryName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SubCategoryId");
@@ -389,7 +759,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("SubCategories");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Supplier", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
                         .ValueGeneratedOnAdd()
@@ -398,15 +768,18 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplierId"), 1L, 1);
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ContactNo")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SupplierName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SupplierId");
@@ -414,9 +787,117 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Inspection", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Project_Entity.Models.Requisition", "Requisition")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("R53_GroubB_GadgetPoint.Models.OrderItem", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Order", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("R53_GroubB_GadgetPoint.Models.ProductItemOrdered", "ItemOrdered", b1 =>
+                        {
+                            b1.Property<int>("OrderItemOrderDetailId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("PictureUrl")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("ProductItemId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("ProductName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("OrderItemOrderDetailId");
+
+                            b1.ToTable("OrderItem");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderItemOrderDetailId");
+                        });
+
+                    b.Navigation("ItemOrdered")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Address", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.AppUser", "AppUser")
+                        .WithOne("Address")
+                        .HasForeignKey("R53_GroupB_GadgetPoint.Models.Address", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.BasketItem", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.CustomerBasket", "CustomerBasket")
+                        .WithMany("BasketItem")
+                        .HasForeignKey("CustomerBasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CustomerBasket");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Inspection", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Requisition", "Requisition")
                         .WithMany()
                         .HasForeignKey("RequistionId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -425,9 +906,9 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("Requisition");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Invoice", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Invoice", b =>
                 {
-                    b.HasOne("Project_Entity.Models.Order", "Order")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -436,69 +917,72 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Order", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Order", b =>
                 {
-                    b.HasOne("Project_Entity.Models.Customer", "Customer")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.DeliveryMethod", "DelivaryMethod")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Project_Entity.Models.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Payment");
-                });
-
-            modelBuilder.Entity("Project_Entity.Models.OrderDetail", b =>
-                {
-                    b.HasOne("Project_Entity.Models.Order", "Order")
-                        .WithMany("OrderDetail")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Project_Entity.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("DelivaryMethodDelMethId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Order");
+                    b.OwnsOne("R53_GroupB_GadgetPoint.Models.ShippingAddress", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("int");
 
-                    b.Navigation("Product");
-                });
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Project_Entity.Models.PackAndDelivery", b =>
-                {
-                    b.HasOne("Project_Entity.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                            b1.Property<string>("FirstName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("LastName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.Navigation("DelivaryMethod");
+
+                    b.Navigation("ShippingAddress")
                         .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Product", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Product", b =>
                 {
-                    b.HasOne("Project_Entity.Models.Brand", "Brand")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.Category", "Category")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.SubCategory", "SubCategory")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -511,33 +995,33 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("SubCategory");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Requisition", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Requisition", b =>
                 {
-                    b.HasOne("Project_Entity.Models.Brand", "Brand")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.Category", "Category")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.Product", "Product")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.SubCategory", "SubCategory")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.Supplier", "Supplier")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -554,15 +1038,15 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Return", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Return", b =>
                 {
-                    b.HasOne("Project_Entity.Models.Invoice", "Invoice")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Invoice", "Invoice")
                         .WithMany()
                         .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.Order", "Order")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -573,15 +1057,15 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Stock", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Stock", b =>
                 {
-                    b.HasOne("Project_Entity.Models.Product", "Product")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Project_Entity.Models.Supplier", "Supplier")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -592,9 +1076,20 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Project_Entity.Models.Order", b =>
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.AppUser", b =>
                 {
-                    b.Navigation("OrderDetail");
+                    b.Navigation("Address")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.CustomerBasket", b =>
+                {
+                    b.Navigation("BasketItem");
+                });
+
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Project_Entity.Models;
 using R53_GroupB_GadgetPoint.DAL.Interface;
 using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
 using R53_GroupB_GadgetPoint.DTOs;
-
+using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.Controllers
 {
@@ -21,10 +20,10 @@ namespace R53_GroupB_GadgetPoint.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDTO>>> GetAll(string sort, int? brandId, int? categoryId,int? subCatId)
+        public async Task<ActionResult<List<ProductDTO>>> GetAll(string? sort, int? brandId, int? categoryId,int? subCatId)
         {
             var spec = new SpecificProduct(sort,brandId,categoryId,subCatId);
-            var entities = await rpProduct.GetAllProduct(spec);
+            var entities = await rpProduct.ListAsync(spec);
             return entities.Select(p=>new ProductDTO
             {
                 ProductId = p.ProductId,
@@ -32,9 +31,9 @@ namespace R53_GroupB_GadgetPoint.Controllers
                 Description = p.Description,
                 Price = p.Price,
                 ProductImage = p.ProductImage,
-                Category=p.Category?.CategoryName,
-                SubCategory = p.SubCategory?.SubCategoryName,
-                Brand=p.Brand?.BrandName }).ToList();
+                Category=p.Category.CategoryName,
+                SubCategory = p.SubCategory.SubCategoryName,
+                Brand=p.Brand.BrandName }).ToList();
         }
 
         [HttpGet("{id}")]
@@ -42,7 +41,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
         {
             var spec = new SpecificProduct(id);
 
-            var p = await rpProduct.GetSpecProduct(spec);
+            var p = await rpProduct.GetEntityWithSpec(spec);
             if (p == null)
             {
                 return NotFound();

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Project_Entity.Models
+namespace R53_GroupB_GadgetPoint.Models
 {
     public class Invoice
     {
@@ -15,7 +15,7 @@ namespace Project_Entity.Models
         public int OrderId { get; set; }
         public Order Order { get; set; }
 
-        public decimal TotalPrice { get; set; } 
+        public decimal TotalPrice { get; set; }
 
 
     }

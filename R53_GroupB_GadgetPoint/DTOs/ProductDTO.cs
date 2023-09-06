@@ -1,4 +1,4 @@
-﻿using Project_Entity.Models;
+﻿
 using System.ComponentModel.DataAnnotations;
 
 namespace R53_GroupB_GadgetPoint.DTOs

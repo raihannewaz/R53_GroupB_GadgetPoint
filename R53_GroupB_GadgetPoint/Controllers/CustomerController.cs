@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Project_Entity.Context;
-using Project_Entity.Models;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroubB_GadgetPoint.Controllers
 {

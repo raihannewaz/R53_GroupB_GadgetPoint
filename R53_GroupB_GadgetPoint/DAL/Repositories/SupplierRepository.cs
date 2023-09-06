@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project_Entity.Context;
-using Project_Entity.Models;
+using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
+using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
@@ -12,6 +13,11 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         public SupplierRepository(StoreContext store)
         {
             _context = store;
+        }
+
+        public Task<int> CountAsync(ISpecification<Supplier> spec)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Supplier> CreateAsync(Supplier entity)
@@ -38,9 +44,19 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         }
 
+        public Task<Supplier> GetEntityWithSpec(ISpecification<Supplier> spec)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IReadOnlyList<Supplier>> ListAllAsync()
         {
             return await _context.Suppliers.ToListAsync();
+        }
+
+        public Task<IReadOnlyList<Supplier>> ListAsync(ISpecification<Supplier> spec)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Supplier> UpdateAsync(int id, Supplier entity)

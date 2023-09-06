@@ -1,4 +1,4 @@
-﻿using Project_Entity.Models;
+﻿using R53_GroupB_GadgetPoint.Models;
 using System.Linq.Expressions;
 
 namespace R53_GroupB_GadgetPoint.DAL.SpecificQuery
