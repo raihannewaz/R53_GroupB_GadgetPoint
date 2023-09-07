@@ -168,10 +168,10 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     SupplierId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactNo = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -349,17 +349,17 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     ShippingAddress_City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShippingAddress_State = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShippingAddress_ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DelivaryMethodDelMethId = table.Column<int>(type: "int", nullable: false),
+                    DeliveryMethodDelMethId = table.Column<int>(type: "int", nullable: false),
                     Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
-                        name: "FK_Orders_DeliveryMethods_DelivaryMethodDelMethId",
-                        column: x => x.DelivaryMethodDelMethId,
+                        name: "FK_Orders_DeliveryMethods_DeliveryMethodDelMethId",
+                        column: x => x.DeliveryMethodDelMethId,
                         principalTable: "DeliveryMethods",
                         principalColumn: "DelMethId",
                         onDelete: ReferentialAction.Cascade);
@@ -371,13 +371,14 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ProductImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false)
+                    BrandId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -639,9 +640,9 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_DelivaryMethodDelMethId",
+                name: "IX_Orders_DeliveryMethodDelMethId",
                 table: "Orders",
-                column: "DelivaryMethodDelMethId");
+                column: "DeliveryMethodDelMethId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",

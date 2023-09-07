@@ -77,7 +77,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         }
         private async Task<string> UploadImageAsync(IFormFile imageFile)
         {
-            string uploadsFolder = Path.Combine(_hostEnvironment.ContentRootPath, "ProductImage");
+            string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "ProductImage");
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 

@@ -19,7 +19,7 @@ namespace R53_GroupB_GadgetPoint.Models
         public int InspectionId { get; set; }
 
         public int RequistionId { get; set; }
-        public Requisition Requisition { get; set; }
+        public Requisition? Requisition { get; set; }
 
         public DateTime InspectionDate { get; set; }
 
