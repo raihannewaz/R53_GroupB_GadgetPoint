@@ -15,5 +15,7 @@ namespace R53_GroupB_GadgetPoint.DTOs
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public string Brand { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

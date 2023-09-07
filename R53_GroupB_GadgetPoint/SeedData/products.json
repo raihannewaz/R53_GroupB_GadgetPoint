@@ -6,7 +6,8 @@
     "ProductImage": "ProductImage/d330-2-500x500.jpg",
     "CategoryId": 1,
     "SubCategoryId": 1,
-    "BrandId": 1
+    "BrandId": 1,
+    "IsActive": true
   },
 
   {
@@ -16,7 +17,8 @@
     "ProductImage": "ProductImage/k14-01-500x500.jpg",
     "CategoryId": 1,
     "SubCategoryId": 1,
-    "BrandId": 1
+    "BrandId": 1,
+    "IsActive": true
   },
 
   {
@@ -26,7 +28,8 @@
     "ProductImage": "ProductImage/15s-fq5487tu-05-500x500.jpg",
     "CategoryId": 1,
     "SubCategoryId": 1,
-    "BrandId": 2
+    "BrandId": 2,
+    "IsActive": true
   },
 
   {
@@ -36,7 +39,8 @@
     "ProductImage": "ProductImage/probook-455-g9-01-500x500.jpg",
     "CategoryId": 1,
     "SubCategoryId": 2,
-    "BrandId": 2
+    "BrandId": 2,
+    "IsActive": true
   },
 
   {
@@ -46,7 +50,8 @@
     "ProductImage": "ProductImage/vostro-14-3400-black-side-500x500.jpg",
     "CategoryId": 1,
     "SubCategoryId": 2,
-    "BrandId": 3
+    "BrandId": 3,
+    "IsActive": true
   },
 
   {
@@ -56,7 +61,8 @@
     "ProductImage": "ProductImage/latitude-3420-01-500x500.jpg",
     "CategoryId": 1,
     "SubCategoryId": 1,
-    "BrandId": 3
+    "BrandId": 3,
+    "IsActive": true
   },
 
   {
@@ -66,7 +72,8 @@
     "ProductImage": "ProductImage/Huawei-Nova-10-Youth-Blue.jpg",
     "CategoryId": 2,
     "SubCategoryId": 2,
-    "BrandId": 4
+    "BrandId": 4,
+    "IsActive": true
   },
 
   {
@@ -76,7 +83,8 @@
     "ProductImage": "ProductImage/Huawei-nova-Y91-Black.jpg",
     "CategoryId": 2,
     "SubCategoryId": 4,
-    "BrandId": 4
+    "BrandId": 4,
+    "IsActive": true
   },
 
   {
@@ -86,7 +94,8 @@
     "ProductImage": "ProductImage/Xiaomi-Redmi-Note-12T-Pro-Black.jpg",
     "CategoryId": 2,
     "SubCategoryId": 4,
-    "BrandId": 5
+    "BrandId": 5,
+    "IsActive": true
   },
 
   {
@@ -96,7 +105,8 @@
     "ProductImage": "ProductImage/Xiaomi-Redmi-12R-Sky-Fantasy.jpg",
     "CategoryId": 2,
     "SubCategoryId": 4,
-    "BrandId": 5
+    "BrandId": 5,
+    "IsActive": true
   },
 
   {
@@ -106,7 +116,8 @@
     "ProductImage": "ProductImage/Samsung-Galaxy-M14-Light-Blue.jpg",
     "CategoryId": 2,
     "SubCategoryId": 4,
-    "BrandId": 6
+    "BrandId": 6,
+    "IsActive": true
   },
   {
     "ProductName": "Samsung Galaxy A14 5G",
@@ -115,7 +126,8 @@
     "ProductImage": "ProductImage/Samsung-G-A14-5G.jpg",
     "CategoryId": 2,
     "SubCategoryId": 4,
-    "BrandId": 6
+    "BrandId": 6,
+    "IsActive": true
   },
   {
     "ProductName": "Apple iPhone 14 Pro Max",
@@ -124,7 +136,8 @@
     "ProductImage": "ProductImage/0000472_iphone-14-pro_550.jpg",
     "CategoryId": 2,
     "SubCategoryId": 3,
-    "BrandId": 7
+    "BrandId": 7,
+    "IsActive": true
   }
 
 ]

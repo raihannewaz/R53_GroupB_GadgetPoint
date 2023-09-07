@@ -1,8 +1,11 @@
-﻿using R53_GroubB_GadgetPoint.Models;
+﻿using Microsoft.AspNetCore.Server.IIS.Core;
+using R53_GroubB_GadgetPoint.Models;
 using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
 using R53_GroupB_GadgetPoint.DAL.Interfaces;
+using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
 using R53_GroupB_GadgetPoint.Models;
+using System.Runtime.CompilerServices;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
@@ -81,7 +84,5 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

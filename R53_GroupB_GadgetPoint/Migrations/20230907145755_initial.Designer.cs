@@ -12,7 +12,7 @@ using R53_GroupB_GadgetPoint.Context;
 namespace R53_GroupB_GadgetPoint.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20230906055143_initial")]
+    [Migration("20230907145755_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -560,14 +560,13 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DelivaryMethodDelMethId")
+                    b.Property<int>("DeliveryMethodDelMethId")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("OrderDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("PaymentIntentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -579,7 +578,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("DelivaryMethodDelMethId");
+                    b.HasIndex("DeliveryMethodDelMethId");
 
                     b.ToTable("Orders");
                 });
@@ -616,18 +615,18 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubCategoryId")
@@ -770,18 +769,15 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplierId"), 1L, 1);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ContactNo")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SupplierName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SupplierId");
@@ -921,9 +917,9 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
             modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Order", b =>
                 {
-                    b.HasOne("R53_GroupB_GadgetPoint.Models.DeliveryMethod", "DelivaryMethod")
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.DeliveryMethod", "DeliveryMethod")
                         .WithMany()
-                        .HasForeignKey("DelivaryMethodDelMethId")
+                        .HasForeignKey("DeliveryMethodDelMethId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -964,7 +960,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.Navigation("DelivaryMethod");
+                    b.Navigation("DeliveryMethod");
 
                     b.Navigation("ShippingAddress")
                         .IsRequired();

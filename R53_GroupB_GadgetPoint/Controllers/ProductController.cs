@@ -33,7 +33,9 @@ namespace R53_GroupB_GadgetPoint.Controllers
                 ProductImage = p.ProductImage,
                 Category=p.Category.CategoryName,
                 SubCategory = p.SubCategory.SubCategoryName,
-                Brand=p.Brand.BrandName }).ToList();
+                Brand=p.Brand.BrandName,
+                IsActive = (bool)p.IsActive
+            }).ToList();
         }
 
         [HttpGet("{id}")]
@@ -55,7 +57,8 @@ namespace R53_GroupB_GadgetPoint.Controllers
                 ProductImage = p.ProductImage,
                 Category = p.Category?.CategoryName,
                 SubCategory = p.SubCategory?.SubCategoryName,
-                Brand = p.Brand?.BrandName
+                Brand = p.Brand?.BrandName,
+                IsActive = (bool)p.IsActive
             };
         }
 

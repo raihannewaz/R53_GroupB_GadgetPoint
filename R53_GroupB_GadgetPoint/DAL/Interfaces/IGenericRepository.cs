@@ -9,7 +9,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Interface
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> CreateAsync(T entity);
-        Task<T> UpdateAsync(int id, T entity);
+        Task<T> UpdateAsync(int id,T entity);
         Task<T> DeleteAsync(T entity);
 
         Task<T> GetEntityWithSpec(ISpecification<T> spec);
