@@ -70,19 +70,23 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         }
 
 
-        public Task<IReadOnlyList<DeliveryMethod>> GetDelivaryMethodAsync()
+        public async Task<IReadOnlyList<DeliveryMethod>> GetDelivaryMethodAsync()
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync();
         }
 
-        public Task<Order> GetOrderByIdAsync(int id, string customerEmail)
+        public async Task<Order> GetOrderByIdAsync(int id, string customerEmail)
         {
-            throw new NotImplementedException();
+            var spec = new SpecificOrder(id, customerEmail);
+
+            return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);   
         }
 
-        public Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string customerEmail)
+        public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string customerEmail)
         {
-            throw new NotImplementedException();
+            var spec = new SpecificOrder(customerEmail);
+
+            return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }
     }
 }

@@ -38,5 +38,38 @@ namespace R53_GroupB_GadgetPoint.Controllers
             return Ok(order);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetOrderForUser()
+        {
+            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+
+            var order = await _orderService.GetOrdersForUserAsync(email);
+
+            return Ok(_mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDto>>(order));
+
+        }
+
+        [HttpGet("confirmed/{id}")]
+        public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
+        {
+            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+
+            var order = await _orderService.GetOrderByIdAsync(id, email);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return _mapper.Map<Order, OrderToReturnDto>(order);
+        }
+
+        [HttpGet("{delivery-Methods}")]
+        public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
+        {
+            return Ok(await _orderService.GetDelivaryMethodAsync());
+        }
+
+
+
     }
 }

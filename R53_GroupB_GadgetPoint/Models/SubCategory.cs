@@ -9,7 +9,5 @@ namespace R53_GroupB_GadgetPoint.Models
         public int SubCategoryId { get; set; }
         public string SubCategoryName { get; set; }
 
-
-
     }
 }
