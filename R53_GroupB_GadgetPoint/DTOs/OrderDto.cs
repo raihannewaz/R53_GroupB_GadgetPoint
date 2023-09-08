@@ -4,8 +4,8 @@ namespace R53_GroupB_GadgetPoint.DTOs
 {
     public class OrderDto
     {
-        public string BasketId { get; set; }
+        public string? BasketId { get; set; }
         public int DeliveryMethodId { get; set; }
-        public AddressDTO ShipToAddress { get; set; }
+        public AddressDTO? ShipToAddress { get; set; }
     }
 }

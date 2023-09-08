@@ -54,7 +54,7 @@ namespace R53_GroupB_GadgetPoint.Models
 
         public string? PaymentIntentId { get; set; }
 
-        public decimal GetSubTotal()
+        public decimal GetTotal()
         {
             return Subtotal + DeliveryMethod.Price;
         }

@@ -4,6 +4,7 @@ using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
 using R53_GroupB_GadgetPoint.DAL.Interfaces;
 using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
+using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
@@ -30,6 +31,36 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
+        }
+
+        public Task<T> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IReadOnlyList<T>> ListAllAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).FirstOrDefaultAsync();
+        }
+
+        public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
+        {
+             return await ApplySpecification(spec).ToListAsync();
+        }
+
+        public Task<int> CountAsync(ISpecification<T> spec)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+        {
+            return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
     }
 }

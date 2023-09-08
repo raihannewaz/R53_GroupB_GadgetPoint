@@ -105,6 +105,10 @@ namespace R53_GroupB_GadgetPoint.Context
             //identity
             modelBuilder.Entity<AppUser>().HasOne(a => a.Address).WithOne(a => a.AppUser).HasForeignKey<Address>(a => a.AppUserId);
 
+            //category and sub category
+
+            
+
 
 
             modelBuilder.Entity<CustomerBasket>()
