@@ -29,7 +29,7 @@ namespace R53_GroubB_GadgetPoint.Models
         //public int ProductId { get; set; }
         //public Product Product { get; set; }
 
-        public ProductItemOrdered ItemOrdered { get; set; }
+        public ProductItemOrdered? ItemOrdered { get; set; }
 
         public decimal Price { get; set; }
         public int Quantity { get; set; }

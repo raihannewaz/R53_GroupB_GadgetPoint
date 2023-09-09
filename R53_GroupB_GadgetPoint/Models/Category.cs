@@ -10,7 +10,7 @@ namespace R53_GroupB_GadgetPoint.Models
     {
         [Key]
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
+        public string? CategoryName { get; set; }
 
 
     }
