@@ -10,7 +10,7 @@ namespace R53_GroupB_GadgetPoint.Models
     {
         [Key]
         public int BrandId { get; set; }
-        public string BrandName { get; set; }
+        public string? BrandName { get; set; }
 
     }
 }

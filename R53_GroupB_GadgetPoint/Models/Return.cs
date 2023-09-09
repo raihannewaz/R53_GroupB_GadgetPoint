@@ -24,7 +24,7 @@ namespace R53_GroupB_GadgetPoint.Models
         public int OrderId { get; set; }
         public Order? Order { get; set; }
 
-        public string ReturnReason { get; set; }
+        public string? ReturnReason { get; set; }
 
 
     }

@@ -10,7 +10,7 @@ namespace R53_GroupB_GadgetPoint.Models
     {
         [Key]
         public int PaymentId { get; set; }
-        public string PaymentMethod { get; set; }
+        public string? PaymentMethod { get; set; }
 
 
     }

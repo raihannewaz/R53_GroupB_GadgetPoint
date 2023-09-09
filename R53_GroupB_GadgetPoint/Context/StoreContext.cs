@@ -22,7 +22,6 @@ namespace R53_GroupB_GadgetPoint.Context
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Inspection> Inspections { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Return> Returns { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }

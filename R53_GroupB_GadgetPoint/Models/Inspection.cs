@@ -23,8 +23,8 @@ namespace R53_GroupB_GadgetPoint.Models
 
         public DateTime InspectionDate { get; set; }
 
-        public string InspectionNote { get; set; }
+        public string? InspectionNote { get; set; }
 
-        public string InsepectionStatus { get; set; } //enum
+        public string? InsepectionStatus { get; set; } //enum
     }
 }
