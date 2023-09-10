@@ -2,7 +2,9 @@
 
 namespace R53_GroupB_GadgetPoint.DAL.Interface
 {
-    public interface IPaymentRepository:IGenericRepository<Payment>
+    public interface IPaymentRepository
     {
+        Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId);
+
     }
 }

@@ -12,15 +12,15 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
     public class OrderRepository : IOrderRepository
     {
        
-        private readonly IDeliveryMethodRepository dmRepo;
+
         private readonly IProductRepository pRepo;
         private readonly IBasketRepository bRepo;
         private readonly IUnitOfWork _unitOfWork;
+        IGenericCrud<DeliveryMethod> _method;
 
-        public OrderRepository(IDeliveryMethodRepository dmRepo, IProductRepository pRepo, IBasketRepository bRepo,IUnitOfWork unitOfWork)
+        public OrderRepository(IGenericCrud<DeliveryMethod> method, IProductRepository pRepo, IBasketRepository bRepo,IUnitOfWork unitOfWork)
         {
-         
-            this.dmRepo = dmRepo;
+            _method = method;
             this.pRepo = pRepo;
             this.bRepo = bRepo;
             this._unitOfWork = unitOfWork;
@@ -43,7 +43,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             }
 
             //delivary
-            var delivaryMethod = await dmRepo.GetByIdAsync(deliveryMethodId);
+            var delivaryMethod = await _method.GetByIdAsync(deliveryMethodId);
 
 
             //calculation

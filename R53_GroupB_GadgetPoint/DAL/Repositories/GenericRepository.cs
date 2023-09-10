@@ -33,9 +33,9 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             _context.Set<T>().Remove(entity);
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public async Task<IReadOnlyList<T>> ListAllAsync()

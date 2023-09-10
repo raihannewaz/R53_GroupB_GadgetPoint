@@ -54,7 +54,7 @@ builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepositor
 builder.Services.AddScoped(typeof(ISupplierRepository), typeof(SupplierRepository));
 builder.Services.AddScoped(typeof(IPaymentRepository), typeof(PaymentRepository));
 builder.Services.AddScoped(typeof(IBasketRepository), typeof(BasketRepository));
-builder.Services.AddScoped(typeof(IDeliveryMethodRepository), typeof(DeliveryMethodRepository));
+//builder.Services.AddScoped(typeof(IDeliveryMethodRepository), typeof(DeliveryMethodRepository));
 builder.Services.AddScoped(typeof(ITokenService), typeof(TokenService));
 builder.Services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
 builder.Services.AddScoped(typeof(IGenericCrud<>), typeof(GenericRepository<>));
@@ -112,8 +112,8 @@ using (var scope = app.Services.CreateScope())
     var usrMgr = services.GetRequiredService<UserManager<AppUser>>();
     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 
-    dbContext.Database.EnsureDeleted();
-    dbContext.Database.EnsureCreated();
+    //dbContext.Database.EnsureDeleted();
+    //dbContext.Database.EnsureCreated();
 
     // Seed data
     await StoreContextSeed.SeedAsync(dbContext, loggerFactory);

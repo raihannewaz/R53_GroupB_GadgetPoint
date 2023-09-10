@@ -32,7 +32,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         public async Task<CustomerBasket> GetBasketAsync(string id)
         {
-            return await _context.CustomerBasket.Where(b => b.CustomerId == id).Include(b=>b.BasketItem).FirstOrDefaultAsync();
+            return await _context.CustomerBasket.Include(b=>b.BasketItem).FirstOrDefaultAsync(a=>a.CustomerId==id);
 
         }
 
