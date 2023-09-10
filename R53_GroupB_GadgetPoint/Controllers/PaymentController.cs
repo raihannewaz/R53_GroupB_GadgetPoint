@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using R53_GroupB_GadgetPoint.DAL.Interface;
 using R53_GroupB_GadgetPoint.Models;
@@ -17,56 +18,17 @@ namespace R53_GroubB_GadgetPoint.Controllers
 
         }
 
-
-        [HttpGet]
-        public async Task<ActionResult> Get()
+        [Authorize]
+        [HttpPost("{basketId}")]
+        public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(string basketId)
         {
-            var entities = await rpPayment.ListAllAsync();
-            return Ok(entities);
+            var basket = await rpPayment.CreateOrUpdatePaymentIntent(basketId);
+
+            if (basket == null) return BadRequest("Problem with your basket");
+
+            return basket;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(int id)
-        {
-            var entity = await rpPayment.GetByIdAsync(id);
-            if (entity == null)
-            {
-                return NotFound();
-            }
-            return Ok(entity);
-        }
 
-        [HttpPost]
-        public async Task<ActionResult> Create(Payment entity)
-        {
-            if (ModelState.IsValid)
-            {
-                var createdEntity = await rpPayment.CreateAsync(entity);
-                return Ok(createdEntity);
-            }
-            return BadRequest();
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, Payment entity)
-        {
-
-            var updatedEntity = await rpPayment.UpdateAsync(id, entity);
-            return Ok(updatedEntity);
-
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var entity = await rpPayment.GetByIdAsync(id);
-            if (entity != null)
-            {
-                await rpPayment.DeleteAsync(entity);
-                return Ok();
-            }
-
-            return NotFound();
-        }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace R53_GroupB_GadgetPoint.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialWithSeed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -55,7 +55,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     BrandId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,43 +81,14 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     CustomerBasketId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DelivaryMethodId = table.Column<int>(type: "int", nullable: true),
+                    ClientSecret = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CustomerBasket", x => x.CustomerBasketId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FarstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNo = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,9 +97,9 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     DelMethId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShortName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeliveryTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeliveryTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -142,7 +113,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     PaymentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -155,7 +126,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     SubCategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubCategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SubCategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,13 +176,13 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Zipcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Zipcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -220,8 +191,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         name: "FK_Address_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -315,13 +285,13 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     BasketItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    PicUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PicUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubCategory = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerBasketId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -343,12 +313,12 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    ShippingAddress_FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingAddress_LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingAddress_Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingAddress_City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingAddress_State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingAddress_ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShippingAddress_FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShippingAddress_LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShippingAddress_Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShippingAddress_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShippingAddress_State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShippingAddress_ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeliveryMethodDelMethId = table.Column<int>(type: "int", nullable: false),
                     Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -430,9 +400,9 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     OrderDetailId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemOrdered_ProductItemId = table.Column<int>(type: "int", nullable: false),
-                    ItemOrdered_ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ItemOrdered_PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ItemOrdered_ProductItemId = table.Column<int>(type: "int", nullable: true),
+                    ItemOrdered_ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ItemOrdered_PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: true)
@@ -533,7 +503,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvoiceId = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false),
-                    ReturnReason = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ReturnReason = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -560,8 +530,8 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RequistionId = table.Column<int>(type: "int", nullable: false),
                     InspectionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InspectionNote = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InsepectionStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    InspectionNote = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InsepectionStatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -578,7 +548,8 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 name: "IX_Address_AppUserId",
                 table: "Address",
                 column: "AppUserId",
-                unique: true);
+                unique: true,
+                filter: "[AppUserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -727,9 +698,6 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
             migrationBuilder.DropTable(
                 name: "BasketItems");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Inspections");

@@ -1,74 +1,88 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.DAL.Interfaces;
 using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
 using R53_GroupB_GadgetPoint.Models;
+using Stripe;
+using Product = R53_GroupB_GadgetPoint.Models.Product;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
     public class PaymentRepository:IPaymentRepository
     {
-        private readonly StoreContext _context;
+  
+        private readonly IBasketRepository _basketRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration;
 
-        public PaymentRepository(StoreContext store)
+        public PaymentRepository(IBasketRepository basketRepository, IUnitOfWork unitOfWork, IConfiguration configuration)
         {
-            _context = store;
+            this._basketRepository = basketRepository;
+            this._unitOfWork = unitOfWork;
+            this._configuration = configuration;
         }
 
-        public Task<int> CountAsync(ISpecification<Payment> spec)
+        public async Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId)
         {
-            throw new NotImplementedException();
-        }
+            StripeConfiguration.ApiKey = _configuration["StripeSettings:SecretKey"];
 
-        public async Task<Payment> CreateAsync(Payment entity)
-        {
-            if (entity == null)
+            var basket =await _basketRepository.GetBasketAsync(basketId);
+            if (basket == null)
             {
-                throw new ArgumentNullException(nameof(entity));
+                return null;
             }
-            await _context.Payments.AddAsync(entity);
-            await _context.SaveChangesAsync();
-            return entity;
-        }
+            var shippingPrice = 0m;
 
-        public async Task<Payment> DeleteAsync(Payment entity)
-        {
-            _context.Payments.Remove(entity);
-            await _context.SaveChangesAsync();
-            return entity;
-        }
-
-        public async Task<Payment> GetByIdAsync(int id)
-        {
-            return await _context.Payments.FindAsync(id);
-
-        }
-
-        public Task<Payment> GetEntityWithSpec(ISpecification<Payment> spec)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IReadOnlyList<Payment>> ListAllAsync()
-        {
-            return await _context.Payments.ToListAsync();
-        }
-
-        public Task<IReadOnlyList<Payment>> ListAsync(ISpecification<Payment> spec)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Payment> UpdateAsync(int id, Payment entity)
-        {
-            var exentity = await _context.Payments.FindAsync(id);
-            if (exentity != null)
+            if (basket.DelivaryMethodId.HasValue)
             {
-                _context.Entry(exentity).CurrentValues.SetValues(entity);
-                await _context.SaveChangesAsync();
+                var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync((int)basket.DelivaryMethodId);
+                if (deliveryMethod != null)
+                {
+                    shippingPrice = deliveryMethod.Price;
+                }
             }
-            return exentity;
 
+
+            foreach (var item in basket.BasketItem)
+            {
+                var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.BasketItemId);
+                if (item.Price != productItem.Price)
+                {
+                    item.Price = productItem.Price;
+                }
+            }
+
+            var service = new PaymentIntentService();
+
+            PaymentIntent intent;
+
+            if (string.IsNullOrEmpty(basket.PaymentIntentId))
+            {
+                var option = new PaymentIntentCreateOptions()
+                {
+                    Amount = (long)basket.BasketItem.Sum(i => i.Quantity * (i.Price * 100)) + (long)shippingPrice * 100,
+                    Currency = "BDT",
+                    PaymentMethodTypes = new List<string> { "card" }
+                };
+                intent = await service.CreateAsync(option);
+                basket.PaymentIntentId = intent.Id;
+                basket.ClientSecret = intent.ClientSecret;
+            }
+            else
+            {
+                var option = new PaymentIntentUpdateOptions()
+                {
+                    Amount = (long)basket.BasketItem.Sum(i => i.Quantity * (i.Price * 100)) + (long)shippingPrice * 100,
+                };
+                await service.UpdateAsync(basket.PaymentIntentId, option);
+            }
+
+
+
+            await _basketRepository.UpdateBasketAsync(basket);
+
+            return basket;
         }
     }
 }
