@@ -19,13 +19,14 @@ namespace R53_GroupB_GadgetPoint.Models
         {
         }
 
-        public Order(IReadOnlyList<OrderItem> orderItems, string customerEmail, ShippingAddress shippingAddress, DeliveryMethod deliveryMethod,  decimal subtotal)
+        public Order(IReadOnlyList<OrderItem> orderItems, string customerEmail, ShippingAddress shippingAddress, DeliveryMethod deliveryMethod,  decimal subtotal, string paymentIntentId)
         {
             CustomerEmail = customerEmail;
             ShippingAddress = shippingAddress;
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             Subtotal = subtotal;
+            PaymentIntentId = paymentIntentId;
         }
 
         [Key]

@@ -16,14 +16,16 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         private readonly IProductRepository pRepo;
         private readonly IBasketRepository bRepo;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPaymentRepository _paymentRepository;
         IGenericCrud<DeliveryMethod> _method;
 
-        public OrderRepository(IGenericCrud<DeliveryMethod> method, IProductRepository pRepo, IBasketRepository bRepo,IUnitOfWork unitOfWork)
+        public OrderRepository(IGenericCrud<DeliveryMethod> method, IProductRepository pRepo, IBasketRepository bRepo,IUnitOfWork unitOfWork, IPaymentRepository paymentRepository)
         {
             _method = method;
             this.pRepo = pRepo;
             this.bRepo = bRepo;
             this._unitOfWork = unitOfWork;
+            this._paymentRepository = paymentRepository;
         }
 
 
@@ -50,8 +52,18 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
             var subTotal = items.Sum(item => item.Price * item.Quantity);
 
+            //payment check
+            var spec = new OrderByPaymentSpecification(basket.PaymentIntentId);
+            var existingOrder = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+
+            if (existingOrder != null)
+            {
+                _unitOfWork.Repository<Order>().Delete(existingOrder);
+                await _paymentRepository.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+            }
+
             //create order
-            var order = new Order(items,customerEmail,shippingAddress,delivaryMethod,subTotal);
+            var order = new Order(items,customerEmail,shippingAddress,delivaryMethod,subTotal,basket.PaymentIntentId);
 
             //save order
            _unitOfWork.Repository<Order>().Add(order);
@@ -63,8 +75,6 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             {
                 return null;
             }
-
-            await bRepo.DeleteBasketAsync(id);
 
             return order;
         }
