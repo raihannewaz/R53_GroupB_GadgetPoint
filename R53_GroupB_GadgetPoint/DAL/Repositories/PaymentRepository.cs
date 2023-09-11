@@ -33,7 +33,6 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                 return null;
             }
             var shippingPrice = 0m;
-
             if (basket.DelivaryMethodId.HasValue)
             {
                 var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync((int)basket.DelivaryMethodId);

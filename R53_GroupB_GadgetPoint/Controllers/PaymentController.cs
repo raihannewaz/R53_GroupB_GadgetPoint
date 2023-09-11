@@ -26,6 +26,7 @@ namespace R53_GroubB_GadgetPoint.Controllers
         [Authorize]
         [HttpPost("{basketId}")]
         public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(string basketId)
+
         {
             var basket = await rpPayment.CreateOrUpdatePaymentIntent(basketId);
 
@@ -62,8 +63,6 @@ namespace R53_GroubB_GadgetPoint.Controllers
             }
             return new EmptyResult();
         }
-
-
 
     }
 }
