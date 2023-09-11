@@ -9,7 +9,7 @@ using Product = R53_GroupB_GadgetPoint.Models.Product;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
-    public class PaymentRepository:IPaymentRepository
+    public class PaymentRepository : IPaymentRepository
     {
   
         private readonly IBasketRepository _basketRepository;
@@ -33,7 +33,6 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                 return null;
             }
             var shippingPrice = 0m;
-
             if (basket.DelivaryMethodId.HasValue)
             {
                 var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync((int)basket.DelivaryMethodId);
@@ -83,6 +82,39 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             await _basketRepository.UpdateBasketAsync(basket);
 
             return basket;
+        }
+
+        public async Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
+        {
+            var spec = new OrderByPaymentSpecification(paymentIntentId);
+            var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            order.Status = OrderStatus.PaymentFailed;
+            await _unitOfWork.Complete();
+            return order;
+        }
+
+        public async Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId)
+        {
+            var spec = new OrderByPaymentSpecification(paymentIntentId);
+            var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+
+            if (order == null)
+            {
+                return null;
+            }
+            order.Status = OrderStatus.PaymentReceived;
+            _unitOfWork.Repository<Order>().Update(order);
+
+            await _unitOfWork.Complete();
+
+            return null;
+
         }
     }
 }
