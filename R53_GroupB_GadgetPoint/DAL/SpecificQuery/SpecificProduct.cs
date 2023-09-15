@@ -5,19 +5,26 @@ namespace R53_GroupB_GadgetPoint.DAL.SpecificQuery
 {
     public class SpecificProduct : BaseSpecification<Product>
     {
-        public SpecificProduct(string sort, int? brandId, int? categoryId, int? subCatId)
-            :base(x=>
-            (!brandId.HasValue || x.BrandId==brandId) && (!categoryId.HasValue ||x.CategoryId==categoryId) && (!subCatId.HasValue ||x.SubCategoryId==subCatId)
-            )
+        public SpecificProduct(ProductSpecParams productParams)
+                  : base(x =>
+                  (string.IsNullOrEmpty(productParams.Search) || x.ProductName.ToLower().Contains(productParams.Search)) &&
+                  (!productParams.BrandId.HasValue || x.BrandId == productParams.BrandId) &&
+                  (!productParams.CategoryId.HasValue || x.CategoryId == productParams.CategoryId) &&
+                  (!productParams.SubCategoryId.HasValue || x.SubCategoryId == productParams.SubCategoryId)
+
+                  )
         {
             AddInclude(x => x.Category);
             AddInclude(x => x.SubCategory);
             AddInclude(x => x.Brand);
-            AddOrderBy(x=>x.ProductName);
+            AddOrderBy(x => x.ProductName);
+            ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1),
+               productParams.PageSize);
 
-            if (!string.IsNullOrEmpty(sort))
+            if (!string.IsNullOrEmpty(productParams.Sort))
             {
-                switch (sort)
+
+                switch (productParams.Sort)
                 {
                     case "priceAsc":
                         AddOrderBy(p => p.Price);

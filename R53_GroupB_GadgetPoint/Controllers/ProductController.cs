@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using R53_GroupB_GadgetPoint.DAL.Interface;
 using R53_GroupB_GadgetPoint.DAL.SpecificQuery;
 using R53_GroupB_GadgetPoint.DTOs;
+using R53_GroupB_GadgetPoint.HelperAutoMapper;
 using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.Controllers
@@ -12,30 +14,30 @@ namespace R53_GroupB_GadgetPoint.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository rpProduct;
+        private readonly IMapper mapper;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository, IMapper mapper)
         {
             rpProduct = productRepository;
+            this.mapper = mapper;
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDTO>>> GetAll(string? sort, int? brandId, int? categoryId,int? subCatId)
+        public async Task<ActionResult<Pagination<ProductDTO>>> GetAll([FromQuery] ProductSpecParams productParams)
         {
-            var spec = new SpecificProduct(sort,brandId,categoryId,subCatId);
+            var spec = new SpecificProduct(productParams);
+
+            var countSpec = new SpecificProduct(productParams);
+
+            var totalItems = await rpProduct.CountAsync(countSpec);
+
             var entities = await rpProduct.ListAsync(spec);
-            return entities.Select(p=>new ProductDTO
-            {
-                ProductId = p.ProductId,
-                ProdcutName = p.ProductName,
-                Description = p.Description,
-                Price = p.Price,
-                ProductImage = p.ProductImage,
-                Category=p.Category.CategoryName,
-                SubCategory = p.SubCategory.SubCategoryName,
-                Brand=p.Brand.BrandName,
-                IsActive = (bool)p.IsActive
-            }).ToList();
+
+            var data = mapper.Map<IReadOnlyList<ProductDTO>>(entities).ToList();
+            return Ok(new Pagination<ProductDTO>(productParams.PageIndex,
+                productParams.PageSize, totalItems, data));
+
         }
 
         [HttpGet("{id}")]
@@ -62,8 +64,10 @@ namespace R53_GroupB_GadgetPoint.Controllers
             };
         }
 
+
+
         [HttpPost]
-        public async Task<ActionResult> Create([FromForm]Product entity)
+        public async Task<ActionResult> Create([FromForm] Product entity)
         {
             if (ModelState.IsValid)
             {

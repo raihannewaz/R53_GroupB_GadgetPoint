@@ -44,10 +44,10 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _context.Products.Include(c=>c.Category)
-                .Include(sc=>sc.SubCategory)
-                .Include(b=>b.Brand)
-                .FirstOrDefaultAsync(p=>p.ProductId==id);
+            return await _context.Products.Include(c => c.Category)
+                .Include(sc => sc.SubCategory)
+                .Include(b => b.Brand)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
 
         }
 
@@ -105,9 +105,10 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return await ApplySpec(spec).ToListAsync();
         }
 
-        public Task<int> CountAsync(ISpecification<Product> spec)
+ 
+        public async Task<int> CountAsync(ISpecification<Product> spec)
         {
-            throw new NotImplementedException();
+            return await ApplySpec(spec).CountAsync();
         }
     }
 }

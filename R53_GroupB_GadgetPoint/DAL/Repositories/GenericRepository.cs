@@ -50,12 +50,12 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
         {
-             return await ApplySpecification(spec).ToListAsync();
+            return await ApplySpecification(spec).ToListAsync();
         }
 
-        public Task<int> CountAsync(ISpecification<T> spec)
+        public async Task<int> CountAsync(ISpecification<T> spec)
         {
-            throw new NotImplementedException();
+            return await ApplySpecification(spec).CountAsync();
         }
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
