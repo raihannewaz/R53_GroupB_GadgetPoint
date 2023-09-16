@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using R53_GroupB_GadgetPoint.Context;
@@ -112,8 +113,8 @@ using (var scope = app.Services.CreateScope())
     var usrMgr = services.GetRequiredService<UserManager<AppUser>>();
     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 
-    //dbContext.Database.EnsureDeleted();
-    //dbContext.Database.EnsureCreated();
+    dbContext.Database.EnsureDeleted();
+    dbContext.Database.EnsureCreated();
 
     // Seed data
     await StoreContextSeed.SeedAsync(dbContext, loggerFactory);
@@ -129,7 +130,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductImage")),
+    RequestPath = "/ProductImage"
+});
 
 app.UseAuthentication();
 app.UseAuthorization();

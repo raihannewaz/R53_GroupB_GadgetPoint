@@ -85,8 +85,9 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             {
                 await imageFile.CopyToAsync(fileStream);
             }
+            var imgUrl = "http://localhost:5250/"+ "ProductImage/" + uniqueFileName;
 
-            return uniqueFileName;
+            return imgUrl;
         }
 
 
