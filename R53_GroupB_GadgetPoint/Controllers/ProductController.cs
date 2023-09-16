@@ -53,7 +53,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
             return new ProductDTO
             {
                 ProductId = p.ProductId,
-                ProdcutName = p.ProductName,
+                ProductName = p.ProductName,
                 Description = p.Description,
                 Price = p.Price,
                 ProductImage = p.ProductImage,
