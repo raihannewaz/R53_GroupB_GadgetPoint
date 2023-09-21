@@ -38,12 +38,31 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
+            CustomerBasket existingBasket = await _context.CustomerBasket.FirstOrDefaultAsync(b => b.CustomerId == basket.CustomerId);
 
-            _context.CustomerBasket.Update(basket);
+            if (existingBasket != null)
+            {
+
+                foreach (var basketItem in basket.BasketItem)
+                {
+                    basketItem.CustomerBasket = existingBasket;
+                }
+                _context.BasketItems.UpdateRange(basket.BasketItem);
+            }
+            else
+            {
+                foreach (var basketItem in basket.BasketItem)
+                {
+                    basketItem.CustomerBasket = basket;
+                }
+                _context.CustomerBasket.Add(basket);
+            }
+
             await _context.SaveChangesAsync();
 
             return basket;
         }
+
 
 
     }

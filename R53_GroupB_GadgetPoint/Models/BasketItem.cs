@@ -8,6 +8,8 @@ namespace R53_GroupB_GadgetPoint.Models
     {
         [Key]
         public int BasketItemId { get; set; }
+
+        public int ProductId { get; set; }
         public string? ProductName { get; set; }
         public decimal Price { get; set; }
 
@@ -17,7 +19,7 @@ namespace R53_GroupB_GadgetPoint.Models
         public string? Category { get; set; }
         public string? SubCategory { get; set; }
 
-        public int CustomerBasketId { get; set; }
+        public string? CustomerId { get; set; }
 
         [JsonIgnore]
         public CustomerBasket? CustomerBasket { get; set; }

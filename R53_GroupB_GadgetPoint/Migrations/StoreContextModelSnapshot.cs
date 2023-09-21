@@ -299,14 +299,17 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerBasketId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PicUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
@@ -319,7 +322,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
                     b.HasKey("BasketItemId");
 
-                    b.HasIndex("CustomerBasketId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("BasketItems");
                 });
@@ -358,28 +361,19 @@ namespace R53_GroupB_GadgetPoint.Migrations
 
             modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.CustomerBasket", b =>
                 {
-                    b.Property<int>("CustomerBasketId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerBasketId"), 1L, 1);
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ClientSecret")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DelivaryMethodId")
                         .HasColumnType("int");
 
                     b.Property<string>("PaymentIntentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CustomerBasketId");
+                    b.HasKey("CustomerId");
 
                     b.ToTable("CustomerBasket");
                 });
@@ -790,9 +784,8 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     b.HasOne("R53_GroupB_GadgetPoint.Models.CustomerBasket", "CustomerBasket")
                         .WithMany("BasketItem")
-                        .HasForeignKey("CustomerBasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("CustomerBasket");
                 });

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace R53_GroupB_GadgetPoint.Migrations
 {
-    public partial class initialWithSeed : Migration
+    public partial class intital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,16 +79,14 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 name: "CustomerBasket",
                 columns: table => new
                 {
-                    CustomerBasketId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     DelivaryMethodId = table.Column<int>(type: "int", nullable: true),
-                    ClientSecret = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ClientSecret = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerBasket", x => x.CustomerBasketId);
+                    table.PrimaryKey("PK_CustomerBasket", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -285,6 +283,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 {
                     BasketItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -292,17 +291,17 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubCategory = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CustomerBasketId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BasketItems", x => x.BasketItemId);
                     table.ForeignKey(
-                        name: "FK_BasketItems_CustomerBasket_CustomerBasketId",
-                        column: x => x.CustomerBasketId,
+                        name: "FK_BasketItems_CustomerBasket_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "CustomerBasket",
-                        principalColumn: "CustomerBasketId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -591,9 +590,9 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketItems_CustomerBasketId",
+                name: "IX_BasketItems_CustomerId",
                 table: "BasketItems",
-                column: "CustomerBasketId");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inspections_RequistionId",
