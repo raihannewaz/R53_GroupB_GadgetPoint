@@ -106,15 +106,15 @@ namespace R53_GroupB_GadgetPoint.Context
 
             //category and sub category
 
-            
+
 
 
 
             modelBuilder.Entity<CustomerBasket>()
-                .HasMany(c => c.BasketItem)
-                .WithOne(b => b.CustomerBasket)
-                .HasForeignKey(b => b.CustomerBasketId);
-
+                 .HasMany(c => c.BasketItem)
+                 .WithOne(b => b.CustomerBasket)
+                 .HasForeignKey(b => b.CustomerId)
+                 .OnDelete(DeleteBehavior.Restrict);
 
 
             base.OnModelCreating(modelBuilder);

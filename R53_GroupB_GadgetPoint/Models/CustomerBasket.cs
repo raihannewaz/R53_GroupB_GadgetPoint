@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace R53_GroupB_GadgetPoint.Models
 {
     public class CustomerBasket
     {
         [Key]
-        public int CustomerBasketId { get; set; }
-        public string? CustomerId { get; set; }
+        [Column(TypeName = "nvarchar(100)")]
+        public string CustomerId { get; set; }
         public List<BasketItem> BasketItem { get; set; } = new List<BasketItem>();
 
         public int? DelivaryMethodId { get; set; }
