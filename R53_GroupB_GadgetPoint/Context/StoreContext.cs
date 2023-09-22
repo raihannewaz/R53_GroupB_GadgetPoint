@@ -114,7 +114,7 @@ namespace R53_GroupB_GadgetPoint.Context
                  .HasMany(c => c.BasketItem)
                  .WithOne(b => b.CustomerBasket)
                  .HasForeignKey(b => b.CustomerId)
-                 .OnDelete(DeleteBehavior.Restrict);
+                 .OnDelete(DeleteBehavior.Cascade);
 
 
             base.OnModelCreating(modelBuilder);
