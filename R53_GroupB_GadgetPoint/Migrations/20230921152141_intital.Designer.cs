@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using R53_GroupB_GadgetPoint.Context;
 
@@ -11,9 +12,10 @@ using R53_GroupB_GadgetPoint.Context;
 namespace R53_GroupB_GadgetPoint.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230921152141_intital")]
+    partial class intital
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -786,7 +788,6 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .WithMany("BasketItem")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
-
 
                     b.Navigation("CustomerBasket");
                 });
