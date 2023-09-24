@@ -17,7 +17,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
         public async Task<bool> DeleteBasketAsync(string id)
         {
-            var basket = await _context.CustomerBasket.Where(b => b.CustomerId == id).FirstOrDefaultAsync();
+            var basket = await _context.CustomerBasket.Include(a=>a.BasketItem).FirstOrDefaultAsync(b => b.CustomerId == id);
 
             if (basket == null)
             {
@@ -63,7 +63,13 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             return basket;
         }
 
-
+        public async Task DeleteBasketItem(int id)
+        {
+            var basket = await _context.BasketItems.FirstOrDefaultAsync(b => b.BasketItemId == id);
+            _context.BasketItems.Remove(basket);
+            await _context.SaveChangesAsync();
+         
+        }
 
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using R53_GroupB_GadgetPoint.Context;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.DAL.Repositories;
 using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.Controllers
@@ -10,6 +13,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
     public class BasketController : ControllerBase
     {
         public readonly IBasketRepository _rpBasket;
+
 
         public BasketController(IBasketRepository basket)
         {
@@ -36,5 +40,12 @@ namespace R53_GroupB_GadgetPoint.Controllers
         {
             await _rpBasket.DeleteBasketAsync(id);
         }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteBasketItem(int id)
+        {
+            await _rpBasket.DeleteBasketItem(id);          
+        }
+
     }
 }
