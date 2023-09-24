@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace R53_GroupB_GadgetPoint.Migrations
 {
-    public partial class intital : Migration
+    public partial class intitalWithSeed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -301,7 +301,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         column: x => x.CustomerId,
                         principalTable: "CustomerBasket",
                         principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

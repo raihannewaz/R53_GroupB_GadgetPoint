@@ -787,7 +787,6 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-
                     b.Navigation("CustomerBasket");
                 });
 

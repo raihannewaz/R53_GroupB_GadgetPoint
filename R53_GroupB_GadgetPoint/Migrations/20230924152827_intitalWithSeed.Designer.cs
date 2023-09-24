@@ -12,8 +12,8 @@ using R53_GroupB_GadgetPoint.Context;
 namespace R53_GroupB_GadgetPoint.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20230921110559_intital")]
-    partial class intital
+    [Migration("20230924152827_intitalWithSeed")]
+    partial class intitalWithSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -787,7 +787,7 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.HasOne("R53_GroupB_GadgetPoint.Models.CustomerBasket", "CustomerBasket")
                         .WithMany("BasketItem")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("CustomerBasket");
                 });
