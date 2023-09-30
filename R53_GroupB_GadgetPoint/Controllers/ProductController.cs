@@ -78,12 +78,21 @@ namespace R53_GroupB_GadgetPoint.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, Product entity)
+        public async Task<ActionResult> Update(int id, [FromForm] Product entity)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var updatedEntity = await rpProduct.UpdateAsync(id, entity);
-            return Ok(updatedEntity);
 
+            if (updatedEntity == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(updatedEntity);
         }
 
         [HttpDelete("{id}")]

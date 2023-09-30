@@ -59,22 +59,37 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                 .Include(b => b.Brand).ToListAsync();
         }
 
+
         public async Task<Product> UpdateAsync(int id, Product entity)
         {
             var exentity = await _context.Products.FindAsync(id);
-            if (exentity != null)
+
+            if (exentity == null)
             {
-                if (entity.ImageFile != null)
-                {
-                    exentity.ProductImage = await UploadImageAsync(entity.ImageFile);
-                }
-
-                _context.Entry(exentity).CurrentValues.SetValues(entity);
-                await _context.SaveChangesAsync();
+                return null; // Product with the specified id was not found.
             }
-            return exentity;
 
+            if (entity.ImageFile != null)
+            {
+                exentity.ProductImage = await UploadImageAsync(entity.ImageFile);
+            }
+
+            // Update the product properties
+            exentity.ProductName = entity.ProductName;
+            exentity.Description = entity.Description;
+            exentity.Price = entity.Price;
+            exentity.CategoryId = entity.CategoryId;
+            exentity.SubCategoryId = entity.SubCategoryId;
+            exentity.BrandId = entity.BrandId;
+            exentity.IsActive = entity.IsActive;
+
+            await _context.SaveChangesAsync();
+
+            return exentity;
         }
+
+
+
         private async Task<string> UploadImageAsync(IFormFile imageFile)
         {
             string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "ProductImage");
