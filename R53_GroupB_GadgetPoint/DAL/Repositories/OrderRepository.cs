@@ -58,7 +58,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
             if (existingOrder != null)
             {
-                _unitOfWork.Repository<Order>().Delete(existingOrder);
+                //_unitOfWork.Repository<Order>().Delete(existingOrder);
                 await _paymentRepository.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
             }
 
