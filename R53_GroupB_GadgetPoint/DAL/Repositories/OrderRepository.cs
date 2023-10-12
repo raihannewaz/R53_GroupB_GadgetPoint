@@ -17,15 +17,17 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         private readonly IBasketRepository bRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPaymentRepository _paymentRepository;
+        private readonly IStockRepository _stock;
         IGenericCrud<DeliveryMethod> _method;
 
-        public OrderRepository(IGenericCrud<DeliveryMethod> method, IProductRepository pRepo, IBasketRepository bRepo,IUnitOfWork unitOfWork, IPaymentRepository paymentRepository)
+        public OrderRepository(IGenericCrud<DeliveryMethod> method, IProductRepository pRepo, IBasketRepository bRepo, IUnitOfWork unitOfWork, IPaymentRepository paymentRepository, IStockRepository stockRepository)
         {
             _method = method;
             this.pRepo = pRepo;
             this.bRepo = bRepo;
             this._unitOfWork = unitOfWork;
             this._paymentRepository = paymentRepository;
+            _stock = stockRepository;
         }
 
 
@@ -62,20 +64,25 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                 await _paymentRepository.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
             }
 
+
             //create order
             var order = new Order(items,customerEmail,shippingAddress,delivaryMethod,subTotal,basket.PaymentIntentId);
 
             //save order
-           _unitOfWork.Repository<Order>().Add(order);
-
-
+            _unitOfWork.Repository<Order>().Add(order);
             var result = await _unitOfWork.Complete();
+
 
             if (result <= 0)
             {
                 return null;
             }
 
+            ////stock update
+            //foreach (var orderItem in items)
+            //{
+            //    await _stock.UpdateStockQuantityAsync(orderItem.ItemOrdered.ProductItemId, -orderItem.Quantity);
+            //}
             return order;
         }
 

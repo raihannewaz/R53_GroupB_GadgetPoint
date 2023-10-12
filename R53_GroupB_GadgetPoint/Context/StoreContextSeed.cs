@@ -70,6 +70,31 @@ namespace R53_GroupB_GadgetPoint.Context
                     context.SaveChanges();
                 }
 
+                if (!context.Suppliers.Any())
+                {
+                    var supplierData = File.ReadAllText("SeedData/supplier.json");
+                    var supplier = JsonSerializer.Deserialize<List<Supplier>>(supplierData);
+
+                    foreach (var supp in supplier)
+                    {
+                        context.Suppliers.Add(supp);
+                    }
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.Stocks.Any())
+                {
+                    var stockData = File.ReadAllText("SeedData/stock.json");
+                    var stock = JsonSerializer.Deserialize<List<Stock>>(stockData);
+
+                    foreach (var stockk in stock)
+                    {
+                        context.Stocks.Add(stockk);
+                    }
+                    await context.SaveChangesAsync();
+                }
+
+
             }
             catch (JsonException ex)
             {

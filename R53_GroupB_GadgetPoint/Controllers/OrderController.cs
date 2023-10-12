@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using R53_GroupB_GadgetPoint.DAL.Interface;
+using R53_GroupB_GadgetPoint.DAL.Interfaces;
 using R53_GroupB_GadgetPoint.DTOs;
 using R53_GroupB_GadgetPoint.Models;
 using System.Security.Claims;
@@ -16,11 +17,13 @@ namespace R53_GroupB_GadgetPoint.Controllers
     {
         private readonly IOrderRepository _orderService;
         private readonly IMapper _mapper;
+        private readonly IStockRepository _stock;
 
-        public OrderController(IOrderRepository orderservice, IMapper mapper)
+        public OrderController(IOrderRepository orderservice, IMapper mapper, IStockRepository stockRepository)
         {
             this._orderService = orderservice;
             this._mapper = mapper;
+            _stock = stockRepository;
         }
 
         [HttpPost]
@@ -31,6 +34,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
             var address = _mapper.Map<AddressDTO, ShippingAddress>(orderDto.ShipToAddress);
 
             var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
+      
             if (order==null)
             {
                 return BadRequest();

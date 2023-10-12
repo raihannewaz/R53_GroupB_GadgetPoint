@@ -49,6 +49,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+builder.Services.AddScoped(typeof(IStockRepository), typeof(StockRepository));
 builder.Services.AddScoped(typeof(ISubCategoryRepository), typeof(SubCategoryRepository));
 builder.Services.AddScoped(typeof(IBrandRepository), typeof(BrandRepository));
 builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));

@@ -1,0 +1,21 @@
+[
+  {
+    "SupplierName": "Shafiq Ahmed",
+    "Email": "shafiq@g.com",
+    "ContactNo": 18255555,
+    "Address": "ctg"
+  },
+
+  {
+    "SupplierName": "Mujahid islam",
+    "Email": "mujahid@g.com",
+    "ContactNo": 17255555,
+    "Address": "ctg"
+  },
+  {
+    "SupplierName": "Saiful Alam",
+    "Email": "saiful@g.com",
+    "ContactNo": 19255555,
+    "Address": "ctg"
+  }
+]
