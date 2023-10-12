@@ -104,7 +104,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             }
 
             exentity.StockQuantity += quantityChange;
-            _context.Entry(exentity).State = EntityState.Modified;
+           // _context.Entry(exentity).State = EntityState.Modified;
 
 
             await _context.SaveChangesAsync();

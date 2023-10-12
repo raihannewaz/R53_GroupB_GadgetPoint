@@ -41,8 +41,8 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             foreach (var item in basket.BasketItem)
             {
                 var productItem = await pRepo.GetByIdAsync(item.BasketItemId);
-                var itemOrderd = new ProductItemOrdered(productItem.ProductId,productItem.ProductName, productItem.ProductImage);
-                var orderItem = new OrderItem(itemOrderd, productItem.Price, item.Quantity);
+                var itemOrdered = new ProductItemOrdered(item.ProductId, item.ProductName, item.PicUrl);
+                var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
                 items.Add(orderItem);
             }
 
@@ -78,11 +78,11 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                 return null;
             }
 
-            ////stock update
-            //foreach (var orderItem in items)
-            //{
-            //    await _stock.UpdateStockQuantityAsync(orderItem.ItemOrdered.ProductItemId, -orderItem.Quantity);
-            //}
+            //stock update
+            foreach (var orderItem in items)
+            {
+                await _stock.UpdateStockQuantityAsync(orderItem.ItemOrdered.ProductItemId, -orderItem.Quantity);
+            }
             return order;
         }
 

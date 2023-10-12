@@ -48,6 +48,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                     basketItem.CustomerBasket = existingBasket;
                 }
                 _context.BasketItems.UpdateRange(basket.BasketItem);
+
             }
             else
             {
