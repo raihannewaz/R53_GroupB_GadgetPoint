@@ -15,14 +15,36 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             _context = storeContext;
         }
 
+
+
         public async Task<PurchaseProduct> CreateAsync(PurchaseProduct entity)
         {
-           entity.PurchaseDate = DateTime.Now;
-           await _context.PurchaseProducts.AddAsync(entity);
-           await _context.SaveChangesAsync();
-           return entity;
 
+            var existingStock = await _context.Stock.SingleOrDefaultAsync(s => s.ProductId == entity.ProductId);
+
+            if (existingStock == null)
+            {
+                var newStock = new Stock
+                {
+                    ProductId = entity.ProductId,
+                    StockQuantity = entity.PurchaseQuantity
+                };
+
+                _context.Stock.Add(newStock);
+            }
+            else
+            {
+                existingStock.StockQuantity += entity.PurchaseQuantity;
+                _context.Entry(existingStock).State = EntityState.Modified;
+            }
+
+            await _context.PurchaseProducts.AddAsync(entity);
+            await _context.SaveChangesAsync();
+
+            return entity;
         }
+
+
 
         public async Task<PurchaseProduct> DeleteAsync(PurchaseProduct entity)
         {
@@ -78,32 +100,18 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        //public async Task<Stock> UpdateStockQuantityAsync(int id, Stock entity)
-        //{
-        //    var exentity = await _context.Stocks.FindAsync(id);
-
-        //    if (exentity == null)
-        //    {
-        //        return null;
-        //    }
-
-        //    exentity.StockQuantity = entity.StockQuantity;
-        //    await _context.SaveChangesAsync();
-        //    return exentity;
-        //}
 
 
-
-        public async Task<PurchaseProduct> UpdateStockQuantityAsync(int id, int quantityChange)
+        public async Task<Stock> UpdateStockQuantityAsync(int id, int quantityChange)
         {
-            var exentity = await _context.PurchaseProducts.FindAsync(id);
+            var exentity = await _context.Stock.FindAsync(id);
 
             if (exentity == null)
             {
                 return null;
             }
 
-            exentity.PurchaseQuantity += quantityChange;
+            exentity.StockQuantity += quantityChange;
            // _context.Entry(exentity).State = EntityState.Modified;
 
 

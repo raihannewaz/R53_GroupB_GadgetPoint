@@ -12,7 +12,7 @@ using R53_GroupB_GadgetPoint.Context;
 namespace R53_GroupB_GadgetPoint.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20231014044933_IntitialWithSeed")]
+    [Migration("20231014045731_IntitialWithSeed")]
     partial class IntitialWithSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

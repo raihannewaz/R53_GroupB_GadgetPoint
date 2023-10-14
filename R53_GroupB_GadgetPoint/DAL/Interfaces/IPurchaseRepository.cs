@@ -5,6 +5,6 @@ namespace R53_GroupB_GadgetPoint.DAL.Interfaces
 {
     public interface IPurchaseRepository : IGenericRepository<PurchaseProduct>
     {
-        Task<PurchaseProduct> UpdateStockQuantityAsync(int id, int entity);
+        Task<Stock> UpdateStockQuantityAsync(int id , int quantity);
     }
 }
