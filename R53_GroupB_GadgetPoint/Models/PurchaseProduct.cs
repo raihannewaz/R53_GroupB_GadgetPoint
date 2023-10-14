@@ -10,7 +10,7 @@ namespace R53_GroupB_GadgetPoint.Models
     {
         [Key]
         public int PurchaseId { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        public DateTimeOffset PurchaseDate { get; set; } = DateTimeOffset.Now;
 
         public int ProductId { get; set; }
         public Product? Product { get; set; }
