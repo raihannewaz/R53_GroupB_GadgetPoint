@@ -7,11 +7,11 @@ namespace R53_GroupB_GadgetPoint.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StockController : ControllerBase
+    public class PurchaseController : ControllerBase
     {
-        private readonly IStockRepository _stockRepository;
+        private readonly IPurchaseRepository _stockRepository;
 
-        public StockController(IStockRepository stockRepository)
+        public PurchaseController(IPurchaseRepository stockRepository)
         {
             _stockRepository = stockRepository;
         }
@@ -35,7 +35,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Stock entity)
+        public async Task<ActionResult> Create(PurchaseProduct entity)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +46,7 @@ namespace R53_GroupB_GadgetPoint.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, Stock entity)
+        public async Task<ActionResult> Update(int id, PurchaseProduct entity)
         {
 
             var updatedEntity = await _stockRepository.UpdateAsync(id, entity);

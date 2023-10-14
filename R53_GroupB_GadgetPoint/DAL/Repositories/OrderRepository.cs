@@ -17,10 +17,10 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         private readonly IBasketRepository bRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPaymentRepository _paymentRepository;
-        private readonly IStockRepository _stock;
+        private readonly IPurchaseRepository _stock;
         IGenericCrud<DeliveryMethod> _method;
 
-        public OrderRepository(IGenericCrud<DeliveryMethod> method, IProductRepository pRepo, IBasketRepository bRepo, IUnitOfWork unitOfWork, IPaymentRepository paymentRepository, IStockRepository stockRepository)
+        public OrderRepository(IGenericCrud<DeliveryMethod> method, IProductRepository pRepo, IBasketRepository bRepo, IUnitOfWork unitOfWork, IPaymentRepository paymentRepository, IPurchaseRepository stockRepository)
         {
             _method = method;
             this.pRepo = pRepo;

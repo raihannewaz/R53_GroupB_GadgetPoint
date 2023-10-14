@@ -23,7 +23,7 @@ namespace R53_GroupB_GadgetPoint.Context
         public DbSet<Inspection> Inspections { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Return> Returns { get; set; }
-        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<PurchaseProduct> PurchaseProducts { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<CustomerBasket> CustomerBasket { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
@@ -53,8 +53,8 @@ namespace R53_GroupB_GadgetPoint.Context
 
 
             //Stock relation
-            modelBuilder.Entity<Stock>().HasOne(s => s.Supplier).WithMany().HasForeignKey(s => s.SupplierId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Stock>().HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<PurchaseProduct>().HasOne(s => s.Supplier).WithMany().HasForeignKey(s => s.SupplierId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<PurchaseProduct>().HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
 
             //return relation
             modelBuilder.Entity<Return>().HasOne(i => i.Invoice).WithMany().HasForeignKey(i => i.InvoiceId).OnDelete(DeleteBehavior.Restrict);
@@ -67,7 +67,7 @@ namespace R53_GroupB_GadgetPoint.Context
 
             //orderdetail relation
             //modelBuilder.Entity<OrderDetail>().HasOne(o => o.Order).WithMany(o => o.OrderDetail).HasForeignKey(o => o.OrderId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Stock>().HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<PurchaseProduct>().HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
 
 
 

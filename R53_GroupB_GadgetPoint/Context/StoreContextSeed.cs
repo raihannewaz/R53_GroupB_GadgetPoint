@@ -82,14 +82,14 @@ namespace R53_GroupB_GadgetPoint.Context
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.Stocks.Any())
+                if (!context.PurchaseProducts.Any())
                 {
                     var stockData = File.ReadAllText("SeedData/stock.json");
-                    var stock = JsonSerializer.Deserialize<List<Stock>>(stockData);
+                    var stock = JsonSerializer.Deserialize<List<PurchaseProduct>>(stockData);
 
                     foreach (var stockk in stock)
                     {
-                        context.Stocks.Add(stockk);
+                        context.PurchaseProducts.Add(stockk);
                     }
                     await context.SaveChangesAsync();
                 }

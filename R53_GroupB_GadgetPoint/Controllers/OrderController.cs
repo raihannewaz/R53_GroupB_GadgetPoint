@@ -17,9 +17,9 @@ namespace R53_GroupB_GadgetPoint.Controllers
     {
         private readonly IOrderRepository _orderService;
         private readonly IMapper _mapper;
-        private readonly IStockRepository _stock;
+        private readonly IPurchaseRepository _stock;
 
-        public OrderController(IOrderRepository orderservice, IMapper mapper, IStockRepository stockRepository)
+        public OrderController(IOrderRepository orderservice, IMapper mapper, IPurchaseRepository stockRepository)
         {
             this._orderService = orderservice;
             this._mapper = mapper;

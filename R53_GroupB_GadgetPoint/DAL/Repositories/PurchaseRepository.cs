@@ -6,57 +6,57 @@ using R53_GroupB_GadgetPoint.Models;
 
 namespace R53_GroupB_GadgetPoint.DAL.Repositories
 {
-    public class StockRepository : IStockRepository
+    public class PurchaseRepository : IPurchaseRepository
     {
         private readonly StoreContext _context;
 
-        public StockRepository(StoreContext storeContext)
+        public PurchaseRepository(StoreContext storeContext)
         {
             _context = storeContext;
         }
 
-        public async Task<Stock> CreateAsync(Stock entity)
+        public async Task<PurchaseProduct> CreateAsync(PurchaseProduct entity)
         {
            entity.PurchaseDate = DateTime.Now;
-           await _context.Stocks.AddAsync(entity);
+           await _context.PurchaseProducts.AddAsync(entity);
            await _context.SaveChangesAsync();
            return entity;
 
         }
 
-        public async Task<Stock> DeleteAsync(Stock entity)
+        public async Task<PurchaseProduct> DeleteAsync(PurchaseProduct entity)
         {
-            _context.Stocks.Remove(entity);
+            _context.PurchaseProducts.Remove(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<Stock> GetByIdAsync(int id)
+        public async Task<PurchaseProduct> GetByIdAsync(int id)
         {
-            return await _context.Stocks.Include(c => c.Product)
+            return await _context.PurchaseProducts.Include(c => c.Product)
                .Include(sc => sc.Supplier)
-               .FirstOrDefaultAsync(p => p.StockId == id);
+               .FirstOrDefaultAsync(p => p.PurchaseId == id);
         }
 
-        public Task<Stock> GetEntityWithSpec(ISpecification<Stock> spec)
+        public Task<PurchaseProduct> GetEntityWithSpec(ISpecification<PurchaseProduct> spec)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IReadOnlyList<Stock>> ListAllAsync()
+        public async Task<IReadOnlyList<PurchaseProduct>> ListAllAsync()
         {
-            return await _context.Stocks.Include(c => c.Product)
+            return await _context.PurchaseProducts.Include(c => c.Product)
                 .Include(sc => sc.Supplier)
                 .ToListAsync();
         }
 
-        public Task<IReadOnlyList<Stock>> ListAsync(ISpecification<Stock> spec)
+        public Task<IReadOnlyList<PurchaseProduct>> ListAsync(ISpecification<PurchaseProduct> spec)
         {
             throw new NotImplementedException();
         }
-        public async Task<Stock> UpdateAsync(int id, Stock entity)
+        public async Task<PurchaseProduct> UpdateAsync(int id, PurchaseProduct entity)
         {
-            var exentity = await _context.Stocks.FindAsync(id);
+            var exentity = await _context.PurchaseProducts.FindAsync(id);
 
             if (exentity == null)
             {
@@ -73,7 +73,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
         }
 
 
-        public Task<int> CountAsync(ISpecification<Stock> spec)
+        public Task<int> CountAsync(ISpecification<PurchaseProduct> spec)
         {
             throw new NotImplementedException();
         }
@@ -94,9 +94,9 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
 
 
 
-        public async Task<Stock> UpdateStockQuantityAsync(int id, int quantityChange)
+        public async Task<PurchaseProduct> UpdateStockQuantityAsync(int id, int quantityChange)
         {
-            var exentity = await _context.Stocks.FindAsync(id);
+            var exentity = await _context.PurchaseProducts.FindAsync(id);
 
             if (exentity == null)
             {
