@@ -64,7 +64,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
             }
 
             exentity.PurchaseDate = entity.PurchaseDate;
-            exentity.StockQuantity = entity.StockQuantity;
+            exentity.PurchaseQuantity = entity.PurchaseQuantity;
             exentity.PurchasePrice = entity.PurchasePrice;   
 
             await _context.SaveChangesAsync();
@@ -103,7 +103,7 @@ namespace R53_GroupB_GadgetPoint.DAL.Repositories
                 return null;
             }
 
-            exentity.StockQuantity += quantityChange;
+            exentity.PurchaseQuantity += quantityChange;
            // _context.Entry(exentity).State = EntityState.Modified;
 
 

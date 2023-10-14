@@ -84,7 +84,7 @@ namespace R53_GroupB_GadgetPoint.Context
 
                 if (!context.PurchaseProducts.Any())
                 {
-                    var stockData = File.ReadAllText("SeedData/stock.json");
+                    var stockData = File.ReadAllText("SeedData/purchase.json");
                     var stock = JsonSerializer.Deserialize<List<PurchaseProduct>>(stockData);
 
                     foreach (var stockk in stock)

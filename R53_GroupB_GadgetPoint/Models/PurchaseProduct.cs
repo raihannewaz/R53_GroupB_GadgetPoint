@@ -18,7 +18,7 @@ namespace R53_GroupB_GadgetPoint.Models
         public int SupplierId { get; set; }
         public Supplier? Supplier { get; set; }
 
-        public int StockQuantity { get; set; }
+        public int PurchaseQuantity { get; set; }
 
         public decimal PurchasePrice { get; set; }
     }

@@ -7,5 +7,9 @@ namespace R53_GroupB_GadgetPoint.Models
     {
         [Key]
         public int StockId { get; set; }
+
+        public int ProductId { get; set; }
+
+        public int StockQuantity { get; set; }
     }
 }
