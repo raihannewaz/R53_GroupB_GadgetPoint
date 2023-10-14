@@ -28,7 +28,8 @@ namespace R53_GroupB_GadgetPoint.Context
         public DbSet<CustomerBasket> CustomerBasket { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
-
+        public DbSet<Stock> Stock { get; set; }
+ 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

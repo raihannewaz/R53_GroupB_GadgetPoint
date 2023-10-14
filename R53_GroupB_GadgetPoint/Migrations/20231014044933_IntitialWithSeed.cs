@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace R53_GroupB_GadgetPoint.Migrations
 {
-    public partial class initialSeed : Migration
+    public partial class IntitialWithSeed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -116,6 +116,20 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.PaymentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stock",
+                columns: table => new
+                {
+                    StockId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    StockQuantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stock", x => x.StockId);
                 });
 
             migrationBuilder.CreateTable(
@@ -418,6 +432,35 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PurchaseProducts",
+                columns: table => new
+                {
+                    PurchaseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PurchaseDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    SupplierId = table.Column<int>(type: "int", nullable: false),
+                    PurchaseQuantity = table.Column<int>(type: "int", nullable: false),
+                    PurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseProducts", x => x.PurchaseId);
+                    table.ForeignKey(
+                        name: "FK_PurchaseProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PurchaseProducts_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
+                        principalColumn: "SupplierId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Requisitions",
                 columns: table => new
                 {
@@ -459,35 +502,6 @@ namespace R53_GroupB_GadgetPoint.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Requisitions_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "SupplierId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Stocks",
-                columns: table => new
-                {
-                    StockId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
-                    StockQuantity = table.Column<int>(type: "int", nullable: false),
-                    PurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stocks", x => x.StockId);
-                    table.ForeignKey(
-                        name: "FK_Stocks_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Stocks_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "SupplierId",
@@ -630,6 +644,16 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PurchaseProducts_ProductId",
+                table: "PurchaseProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseProducts_SupplierId",
+                table: "PurchaseProducts",
+                column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Requisitions_BrandId",
                 table: "Requisitions",
                 column: "BrandId");
@@ -663,16 +687,6 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 name: "IX_Returns_OrderId",
                 table: "Returns",
                 column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stocks_ProductId",
-                table: "Stocks",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stocks_SupplierId",
-                table: "Stocks",
-                column: "SupplierId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -708,10 +722,13 @@ namespace R53_GroupB_GadgetPoint.Migrations
                 name: "Payments");
 
             migrationBuilder.DropTable(
+                name: "PurchaseProducts");
+
+            migrationBuilder.DropTable(
                 name: "Returns");
 
             migrationBuilder.DropTable(
-                name: "Stocks");
+                name: "Stock");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

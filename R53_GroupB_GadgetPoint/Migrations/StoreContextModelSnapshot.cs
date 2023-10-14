@@ -548,6 +548,38 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.PurchaseProduct", b =>
+                {
+                    b.Property<int>("PurchaseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PurchaseId"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("PurchaseDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<decimal>("PurchasePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("PurchaseQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PurchaseId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("PurchaseProducts");
+                });
+
             modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Requisition", b =>
                 {
                     b.Property<int>("RequisitionId")
@@ -626,25 +658,12 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("PurchaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("PurchasePrice")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.HasKey("StockId");
 
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("Stocks");
+                    b.ToTable("Stock");
                 });
 
             modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.SubCategory", b =>
@@ -884,6 +903,25 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("SubCategory");
                 });
 
+            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.PurchaseProduct", b =>
+                {
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("R53_GroupB_GadgetPoint.Models.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Supplier");
+                });
+
             modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Requisition", b =>
                 {
                     b.HasOne("R53_GroupB_GadgetPoint.Models.Brand", "Brand")
@@ -944,25 +982,6 @@ namespace R53_GroupB_GadgetPoint.Migrations
                     b.Navigation("Invoice");
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.Stock", b =>
-                {
-                    b.HasOne("R53_GroupB_GadgetPoint.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("R53_GroupB_GadgetPoint.Models.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("R53_GroupB_GadgetPoint.Models.AppUser", b =>
