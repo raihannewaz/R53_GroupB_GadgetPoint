@@ -1,0 +1,68 @@
+[
+  {
+
+    "ProductId": 1,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 2,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 3,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 4,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 5,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 6,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 7,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 8,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 9,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 10,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 11,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 12,
+    "StockQuantity": 100
+  },
+  {
+
+    "ProductId": 13,
+    "StockQuantity": 100
+  }
+
+]

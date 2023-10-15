@@ -58,6 +58,7 @@ namespace R53_GroupB_GadgetPoint.Context
                     context.SaveChanges();
                 }
 
+
                 if (!context.DeliveryMethods.Any())
                 {
                     var deliveryMethod = File.ReadAllText("SeedData/delivery.json");
@@ -84,15 +85,29 @@ namespace R53_GroupB_GadgetPoint.Context
 
                 if (!context.PurchaseProducts.Any())
                 {
-                    var stockData = File.ReadAllText("SeedData/purchase.json");
-                    var stock = JsonSerializer.Deserialize<List<PurchaseProduct>>(stockData);
+                    var purchaseData = File.ReadAllText("SeedData/purchase.json");
+                    var purchase = JsonSerializer.Deserialize<List<PurchaseProduct>>(purchaseData);
 
-                    foreach (var stockk in stock)
+                    foreach (var pur in purchase)
                     {
-                        context.PurchaseProducts.Add(stockk);
+                        context.PurchaseProducts.Add(pur);
                     }
                     await context.SaveChangesAsync();
                 }
+
+
+                if (!context.Stock.Any())
+                {
+                    var stockData = File.ReadAllText("SeedData/stock.json");
+                    var stock = JsonSerializer.Deserialize<List<Stock>>(stockData);
+
+                    foreach (var st in stock)
+                    {
+                        context.Stock.Add(st);
+                    }
+                    context.SaveChanges();
+                }
+
 
 
             }
